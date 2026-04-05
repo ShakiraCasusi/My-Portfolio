@@ -11,6 +11,7 @@ const config: Config = {
             colors: {
                 border: "hsl(var(--border))",
                 background: "#030014",
+                foreground: "hsl(var(--foreground))",
             },
         },
     },

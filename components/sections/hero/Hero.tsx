@@ -2,7 +2,7 @@
 
 import { ScrollingText, TypingEffect, SocialIcons } from './HeroHelpers'
 import { MdArrowOutward } from 'react-icons/md'
-import ProfileCard from './ProfileCard'
+import ProfileCard from '@/components/ui/ProfileCard'
 
 export function Hero() {
     const description = "Transforming ideas into high-impact digital experiences. Specialist in UI/UX, Web Dev, and Content Strategy. I create functional art for the modern web—from the first pixel to the final edit."
