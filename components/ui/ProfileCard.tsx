@@ -11,8 +11,8 @@ const ANIMATION_CONFIG = {
     ENTER_TRANSITION_MS: 180
 };
 
-const clamp = (v, min = 0, max = 100) => Math.min(Math.max(v, min), max);
-const round = (v, precision = 3) => parseFloat(v.toFixed(precision));
+const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
+const round = (v: number, precision = 3) => parseFloat(v.toFixed(precision));
 
 const ProfileCardComponent = ({
     avatarUrl = '/pictures/default.jpg',
@@ -21,14 +21,14 @@ const ProfileCardComponent = ({
     enableMobileTilt = false,
     mobileTiltSensitivity = 5,
 }: any) => {
-    const wrapRef = useRef(null);
-    const shellRef = useRef(null);
-    const leaveRafRef = useRef(null);
+    const wrapRef = useRef<HTMLDivElement>(null);
+    const shellRef = useRef<HTMLDivElement>(null);
+    const leaveRafRef = useRef<number | null>(null);
 
     const tiltEngine = useMemo(() => {
         if (!enableTilt) return null;
 
-        let rafId = null;
+        let rafId: number | null = null;
         let running = false;
         let lastTs = 0;
 
@@ -41,7 +41,7 @@ const ProfileCardComponent = ({
         const INITIAL_TAU = 0.6;
         let initialUntil = 0;
 
-        const setVarsFromXY = (x, y) => {
+        const setVarsFromXY = (x: number, y: number) => {
             const shell = shellRef.current;
             const wrap = wrapRef.current;
             if (!shell || !wrap) return;
@@ -63,7 +63,7 @@ const ProfileCardComponent = ({
             for (const [k, v] of Object.entries(properties)) (wrap as any)?.style.setProperty(k, v);
         };
 
-        const step = ts => {
+        const step = (ts: number) => {
             if (!running) return;
             if (lastTs === 0) lastTs = ts;
             const dt = (ts - lastTs) / 1000;
@@ -99,12 +99,12 @@ const ProfileCardComponent = ({
         };
 
         return {
-            setImmediate(x, y) {
+            setImmediate(x: number, y: number) {
                 currentX = x;
                 currentY = y;
                 setVarsFromXY(currentX, currentY);
             },
-            setTarget(x, y) {
+            setTarget(x: number, y: number) {
                 targetX = x;
                 targetY = y;
                 start();
@@ -114,7 +114,7 @@ const ProfileCardComponent = ({
                 if (!shell) return;
                 this.setTarget((shell as any).clientWidth / 2, (shell as any).clientHeight / 2);
             },
-            beginInitial(durationMs) {
+            beginInitial(durationMs: number) {
                 initialUntil = performance.now() + durationMs;
                 start();
             },
@@ -136,7 +136,7 @@ const ProfileCardComponent = ({
     };
 
     const handlePointerMove = useCallback(
-        event => {
+        (event: PointerEvent) => {
             const shell = shellRef.current;
             if (!shell || !tiltEngine) return;
             const { x, y } = getOffsets(event, shell);
@@ -146,7 +146,7 @@ const ProfileCardComponent = ({
     );
 
     const handlePointerEnter = useCallback(
-        event => {
+        (event: PointerEvent) => {
             const shell = shellRef.current;
             if (!shell || !tiltEngine) return;
 
@@ -178,7 +178,7 @@ const ProfileCardComponent = ({
     }, [tiltEngine]);
 
     const handleDeviceOrientation = useCallback(
-        event => {
+        (event: DeviceOrientationEvent) => {
             const shell = shellRef.current;
             if (!shell || !tiltEngine) return;
 
@@ -220,7 +220,7 @@ const ProfileCardComponent = ({
             if (anyMotion && typeof anyMotion.requestPermission === 'function') {
                 anyMotion
                     .requestPermission()
-                    .then(state => {
+                    .then((state: string) => {
                         if (state === 'granted') {
                             window.addEventListener('deviceorientation', deviceOrientationHandler as any);
                         }
