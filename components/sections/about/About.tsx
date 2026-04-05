@@ -69,16 +69,16 @@ export function About() {
             <div className="w-full max-w-6xl">
                 {/* Main Container with Border */}
                 <div className="bg-gray-900/40 border-2 border-orange-400 rounded-3xl p-6 lg:p-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
-                        {/* Right - Lanyard */}
-                        <div className="flex justify-center lg:justify-start -mr-8 lg:-mr-12">
-                            <div className="w-96 h-96">
-                                <Lanyard position={[0, 0, 20]} />
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-6 items-start">
+                        {/* Left - Lanyard (1 Column) */}
+                        <div className="flex justify-center items-center h-full min-h-96">
+                            <div className="w-full h-96 lg:h-full">
+                                <Lanyard position={[0, 0, 18]} fov={13} />
                             </div>
                         </div>
 
-                        {/* Right - Content */}
-                        <div className="flex flex-col gap-6">
+                        {/* Right - Content (3 Columns Span) */}
+                        <div className="lg:col-span-3 flex flex-col gap-6 pt-4 lg:pt-0">
                             {/* Heading */}
                             <div>
                                 <h2 className="text-4xl lg:text-5xl font-bold text-white" style={{ fontFamily: "'Outfit', sans-serif" }}>

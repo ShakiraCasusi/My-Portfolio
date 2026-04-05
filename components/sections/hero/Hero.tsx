@@ -2,7 +2,7 @@
 
 import { ScrollingText, TypingEffect, SocialIcons } from './HeroHelpers'
 import { MdArrowOutward } from 'react-icons/md'
-import ProfileCard from '@/components/ui/ProfileCard'
+import ProfileCard from './ProfileCard'
 
 export function Hero() {
     const description = "Transforming ideas into high-impact digital experiences. Specialist in UI/UX, Web Dev, and Content Strategy. I create functional art for the modern web—from the first pixel to the final edit."
@@ -62,10 +62,22 @@ export function Hero() {
                     </div>
 
                     {/* Right Column - Profile Card */}
-                    <div className="hidden lg:flex items-center justify-center">
+                    <div className="flex items-center justify-center mt-8 lg:mt-0">
                         <ProfileCard
+                            name="Shakira Angela Agudo Casusi"
+                            title="Developer & Designer"
+                            handle="shakira"
+                            status="Available"
+                            contactText="Contact Me"
                             avatarUrl="/pictures/464751278_567183799036449_3163974364779314123_n.jpg"
+                            showUserInfo={true}
                             enableTilt={true}
+                            enableMobileTilt={false}
+                            onContactClick={() => console.log('Contact clicked')}
+                            behindGlowColor="rgba(255, 140, 0, 0.5)"
+                            iconUrl="/assets/demo/iconpattern.png"
+                            behindGlowEnabled
+                            innerGradient="linear-gradient(145deg,#ff8c00 0%,#ff6b35 100%)"
                         />
                     </div>
                 </div>
