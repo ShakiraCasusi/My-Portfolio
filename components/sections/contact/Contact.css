@@ -1,0 +1,140 @@
+.contact-container {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(20, 10, 30, 0.2) 100%);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 0;
+}
+
+.contact-left {
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-right {
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-left,
+    .contact-right {
+        grid-column: 1;
+    }
+}
+
+.blinking-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #f97316;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+}
+
+@keyframes blink {
+
+    0%,
+    49%,
+    100% {
+        opacity: 1;
+    }
+
+    50%,
+    99% {
+        opacity: 0.3;
+    }
+}
+
+.contact-card {
+    position: relative;
+    overflow: visible;
+    margin-bottom: 1.25rem;
+}
+
+.contact-card:last-child {
+    margin-bottom: 0;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(249, 115, 22, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 0.5rem;
+    pointer-events: none;
+}
+
+.contact-card:hover::before {
+    opacity: 1;
+}
+
+.email-icon,
+.whatsapp-icon {
+    position: relative;
+}
+
+/* Form styling */
+input[type="text"],
+input[type="email"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    background-color: transparent;
+    border-bottom-color: rgba(249, 115, 22, 0.8);
+    box-shadow: none;
+}
+
+textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    background-color: rgba(249, 115, 22, 0.08);
+    border-color: rgba(249, 115, 22, 0.5) !important;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
+}
+
+/* Button animation */
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .contact-container {
+        padding: 2rem 1.5rem !important;
+    }
+}

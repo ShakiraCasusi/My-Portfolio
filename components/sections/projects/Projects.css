@@ -1,0 +1,36 @@
+.project-card {
+    perspective: 1000px;
+}
+
+.project-image {
+    transition: filter 0.3s ease-in-out;
+}
+
+.project-overlay {
+    transition: opacity 0.3s ease-in-out;
+    backdrop-filter: blur(2px);
+}
+
+/* Smooth hover effect for the entire card */
+.project-card:hover .project-image {
+    filter: blur(0);
+}
+
+/* Stack tags styling */
+.project-card span {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover span {
+    border-color: rgba(249, 115, 22, 0.8);
+    background-color: rgba(249, 115, 22, 0.15);
+}
+
+/* View Project link effect */
+.project-card a {
+    transition: all 0.3s ease;
+}
+
+.project-card a:hover {
+    transform: translateX(4px);
+}
