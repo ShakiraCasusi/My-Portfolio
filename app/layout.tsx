@@ -3,7 +3,7 @@ import { Navbar } from "@/components/layout/Navbar"
 import "@/styles/globals.css"
 import { cn } from "@/lib/utils";
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
     title: "Shakira Angela | Portfolio",
     description: "A modern personal portfolio built with Next.js and Tailwind CSS",
 }
