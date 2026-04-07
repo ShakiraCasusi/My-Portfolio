@@ -1,6 +1,6 @@
 'use client';
 
-import BorderGlow from '../BorderGlow';
+import BorderGlow from '../../BorderGlow';
 import './TechStack.css';
 import type { ReactNode } from 'react';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap, FaGitAlt, FaGithub, FaAws, FaCode } from 'react-icons/fa';
@@ -12,39 +12,39 @@ import { BsMeta } from 'react-icons/bs';
 import { HiOutlineVideoCamera } from 'react-icons/hi';
 
 interface TechItem {
-    icon: ReactNode;
-    label: string;
-    category: string;
+  icon: ReactNode;
+  label: string;
+  category: string;
 }
 
 const techItems: TechItem[] = [
-    { icon: <FaHtml5 />, label: 'HTML', category: 'Frontend' },
-    { icon: <FaCss3Alt />, label: 'CSS', category: 'Frontend' },
-    { icon: <FaJs />, label: 'JavaScript', category: 'Frontend' },
-    { icon: <FaReact />, label: 'React', category: 'Frontend Library' },
-    { icon: <SiNextdotjs />, label: 'Next.js', category: 'Framework' },
-    { icon: <SiTailwindcss />, label: 'Tailwind', category: 'CSS Framework' },
-    { icon: <FaBootstrap />, label: 'Bootstrap', category: 'CSS Framework' },
+  { icon: <FaHtml5 />, label: 'HTML', category: 'Frontend' },
+  { icon: <FaCss3Alt />, label: 'CSS', category: 'Frontend' },
+  { icon: <FaJs />, label: 'JavaScript', category: 'Frontend' },
+  { icon: <FaReact />, label: 'React', category: 'Frontend Library' },
+  { icon: <SiNextdotjs />, label: 'Next.js', category: 'Framework' },
+  { icon: <SiTailwindcss />, label: 'Tailwind', category: 'CSS Framework' },
+  { icon: <FaBootstrap />, label: 'Bootstrap', category: 'CSS Framework' },
 
-    { icon: <MdSecurity />, label: 'Helmet.js', category: 'Security' },
-    { icon: <SiMongodb />, label: 'MongoDB', category: 'Database' },
-    { icon: <SiSupabase />, label: 'Supabase', category: 'Backend Service' },
+  { icon: <MdSecurity />, label: 'Helmet.js', category: 'Security' },
+  { icon: <SiMongodb />, label: 'MongoDB', category: 'Database' },
+  { icon: <SiSupabase />, label: 'Supabase', category: 'Backend Service' },
 
-    { icon: <FaGitAlt />, label: 'Git', category: 'Version Control' },
-    { icon: <FaGithub />, label: 'GitHub', category: 'Repository' },
-    { icon: <FaCode />, label: 'VS Code', category: 'Code Editor' },
-    { icon: <FaAws />, label: 'AWS', category: 'Cloud' },
+  { icon: <FaGitAlt />, label: 'Git', category: 'Version Control' },
+  { icon: <FaGithub />, label: 'GitHub', category: 'Repository' },
+  { icon: <FaCode />, label: 'VS Code', category: 'Code Editor' },
+  { icon: <FaAws />, label: 'AWS', category: 'Cloud' },
 
-    { icon: <SiFigma />, label: 'Figma', category: 'UI/UX Design' },
-    { icon: <SiCanva />, label: 'Canva', category: 'Design Tool' },
-    { icon: <HiOutlineVideoCamera />, label: 'CapCut', category: 'Video Editing' },
+  { icon: <SiFigma />, label: 'Figma', category: 'UI/UX Design' },
+  { icon: <SiCanva />, label: 'Canva', category: 'Design Tool' },
+  { icon: <HiOutlineVideoCamera />, label: 'CapCut', category: 'Video Editing' },
 
-    { icon: <FcGoogle />, label: 'Google Workspace', category: 'Productivity' },
-    { icon: <MdInsights />, label: 'Data Viz', category: 'Data Visualization' },
-    { icon: <SiNotion />, label: 'Notion', category: 'Documentation' },
+  { icon: <FcGoogle />, label: 'Google Workspace', category: 'Productivity' },
+  { icon: <MdInsights />, label: 'Data Viz', category: 'Data Visualization' },
+  { icon: <SiNotion />, label: 'Notion', category: 'Documentation' },
 
-    { icon: <RiRobot2Line />, label: 'AI Tools', category: 'AI' },
-    { icon: <BsMeta />, label: 'Meta Business Suite', category: 'Marketing' },
+  { icon: <RiRobot2Line />, label: 'AI Tools', category: 'AI' },
+  { icon: <BsMeta />, label: 'Meta Business Suite', category: 'Marketing' },
 ];
 
 export default function TechStack() {

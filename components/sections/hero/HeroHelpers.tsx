@@ -76,31 +76,31 @@ export function SocialIcons() {
         {
             name: 'GitHub',
             Icon: FaGithub,
-            url: 'https://github.com',
+            url: 'https://github.com/ShakiraCasusi',
             label: 'GitHub Profile'
         },
         {
             name: 'LinkedIn',
             Icon: FiLinkedin,
-            url: 'https://linkedin.com',
+            url: 'https://www.linkedin.com/in/shakira-casusi-31612631a/',
             label: 'LinkedIn Profile'
         },
         {
             name: 'Behance',
             Icon: FaBehance,
-            url: 'https://behance.net',
+            url: 'https://www.behance.net/shakiracasusi',
             label: 'Behance Portfolio'
         },
         {
             name: 'Instagram',
             Icon: FaInstagram,
-            url: 'https://instagram.com',
+            url: 'https://www.instagram.com/k.rscu/',
             label: 'Instagram Profile'
         },
         {
             name: 'TikTok',
             Icon: AiFillTikTok,
-            url: 'https://tiktok.com',
+            url: 'https://www.tiktok.com/@pnzz7e',
             label: 'TikTok Profile'
         },
     ]

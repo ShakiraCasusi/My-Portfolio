@@ -1,0 +1,48 @@
+{
+    "nav": {
+        "home": "Balay",
+        "about": "Mahitungod",
+        "projects": "Mga Proyekto",
+        "contact": "Makipagtulungan"
+    },
+    "hero": {
+        "greeting": "Halo, ako ay",
+        "description": "Binabago ang mga ideya sa mataas na epekto na karanasan sa digital. Espesyalista sa UI/UX, Web Dev, at Content Strategy. Lumilikha ako ng functional na sining para sa modernong web—mula sa unang pixel hanggang sa katapusang edit.",
+        "viewProjects": "Tuklasin ang Mga Proyekto",
+        "contactMe": "Makipagtulungan Sa Akin",
+        "profileName": "Shakira Angela Agudo Casusi",
+        "profileTitle": "Developer & Designer",
+        "profileStatus": "Available"
+    },
+    "about": {
+        "title": "Mahitungod Kanako",
+        "subtitle": "Nag-ugnay ng pamumuno at technical precision.",
+        "description1": "Ang aking digital journey ay nagsimula sa unang taon ng college, na pinaglalakbayan ng passion para sa serbisyong publiko at pamumuno. Lagi kong naniniwala na ang teknolohiya ay pinakamahusay kapag naglilingkod sa mga tao, at naglalayong gabayan ang mga negosyo at indibidwal tungo sa mga solusyon na tunay na may epekto.",
+        "description2": "Sa kasalukuyan, nag-major ako sa Software Development sa Mapúa Malayan Colleges Laguna, pinagsasama ang technical expertise sa malakas na komunikasyon at pamumuno. Ang natatanging kombinasyong ito ay nagpapahintulot sa akin na pamahalaan ang komplikadong mga proyekto habang sinisiguro na bawat digital na solusyon ay functional at human-centered.",
+        "experience": "Taong Karanasan",
+        "projects": "Proyektong Tapos",
+        "clients": "Masayang Kliyente",
+        "downloadCv": "I-download ang CV"
+    },
+    "projects": {
+        "titlePrefix": "Piniling",
+        "titleSuffix": "Mga Proyekto",
+        "subtitle": "Ilang mga gawain na nagpapakita sa aking kahusayan."
+    },
+    "contact": {
+        "title": "Makipag-ugnayan Tayo",
+        "subtitle": "Laging bukas ko sa mga bag-ong proyekto o simpleng tsikahan. Magpadala ng signal.",
+        "status": "STATUS SA SISTEMA: ONLINE",
+        "email": "Email",
+        "whatsapp": "WhatsApp",
+        "uplink": "ITATAAG ANG UPLINK...",
+        "formTitle": "Magsimula ng Pagpadala ng Data",
+        "senderID": "ID sa Nagpadala / Ngalan",
+        "emailPlaceholder": "Adres sa Email",
+        "messagePlaceholder": "Data sa Pagpadala ng Mensahe",
+        "submit": "Magsimula ng Pagpadala",
+        "sending": "Nagpapadala...",
+        "success": "Matagumpay na ipinadala ang mensahe!",
+        "error": "May kamalian sa pagpadala. Subukan pa og usab."
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "nav": {
+        "home": "Beranda",
+        "about": "Tentang",
+        "projects": "Proyek",
+        "contact": "Kontak"
+    },
+    "hero": {
+        "title": "Shakira Angela",
+        "subtitle": "Developer Full Stack & Desainer",
+        "description": "Menciptakan pengalaman web yang indah dan fungsional",
+        "viewProjects": "Lihat Proyek",
+        "contactMe": "Hubungi Saya"
+    },
+    "about": {
+        "title": "Tentang Saya",
+        "description": "Saya adalah pengembang yang bersemangat dengan kecintaan untuk menciptakan solusi inovatif"
+    },
+    "projects": {
+        "title": "Proyek",
+        "description": "Koleksi karya terbaik saya"
+    },
+    "contact": {
+        "title": "Mari Terhubung",
+        "subtitle": "Saya selalu terbuka untuk proyek baru atau sekadar obrolan. Kirim sinyal Anda.",
+        "status": "STATUS SISTEM: ONLINE",
+        "email": "Email",
+        "whatsapp": "WhatsApp",
+        "uplink": "MENJALIN UPLINK...",
+        "formTitle": "Mulai Transmisi Data",
+        "senderID": "ID Pengirim / Nama",
+        "emailPlaceholder": "Alamat Email",
+        "messagePlaceholder": "Data Transmisi Pesan",
+        "submit": "Mulai Transmisi",
+        "sending": "Mengirim...",
+        "success": "Pesan berhasil dikirim!",
+        "error": "Kesalahan saat mengirim pesan. Silakan coba lagi."
+    }
+}

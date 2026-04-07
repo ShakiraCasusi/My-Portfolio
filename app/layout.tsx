@@ -1,24 +1,29 @@
 import type { Metadata } from "next"
-import { Navbar } from "@/components/layout/Navbar"
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 import "@/styles/globals.css"
-import { cn } from "@/lib/utils";
+
+type Props = {
+    children: React.ReactNode;
+};
 
 export const metadata: Metadata = {
     title: "Shakira Angela | Portfolio",
     description: "A modern personal portfolio built with Next.js and Tailwind CSS",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
-}: {
-    children: React.ReactNode
-}) {
+}: Props) {
+    const messages = await getMessages();
+
     return (
-        <html lang="en" className={cn("dark", "font-sans")}>
-            <body className="bg-slate-950">
-                <Navbar />
-                {children}
+        <html>
+            <body>
+                <NextIntlClientProvider messages={messages}>
+                    {children}
+                </NextIntlClientProvider>
             </body>
         </html>
-    )
+    );
 }

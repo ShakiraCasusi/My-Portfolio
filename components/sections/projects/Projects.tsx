@@ -1,4 +1,5 @@
 import "./Projects.css";
+import { useTranslations } from 'next-intl';
 
 interface ProjectCard {
     id: number;
@@ -12,42 +13,43 @@ interface ProjectCard {
 const projects: ProjectCard[] = [
     {
         id: 1,
-        title: "Project One",
-        description: "A brief description of your project",
-        image: "/pictures/project1.jpg",
-        stack: ["React", "TypeScript", "Tailwind"],
-        viewLink: "#project1"
+        title: "Re;Read",
+        description: "Re;Read is an online platform for buying and selling second-hand books. It gives students and readers access to quality and affordable books.",
+        image: "/pictures/Screenshot 2026-04-07 154955.png",
+        stack: ["HTML", "CSS", "JS", "BOOTSTRAP", "MongoDB"],
+        viewLink: "https://reread-1.onrender.com/"
     },
     {
         id: 2,
-        title: "Project Two",
-        description: "Another amazing project you created",
-        image: "/pictures/project2.jpg",
-        stack: ["Next.js", "PostgreSQL", "Vercel"],
+        title: "loT Logistics Monitoring Dashboard",
+        description: "This school project is an IoT project that collects/cleans sensor data (e.g., temperature, humidity, shock) and presents it through analyses and dashboards for monitoring conditions in transit.",
+        image: "/pictures/Tableau.png",
+        stack: ["HTML", "Jupyter Notebook", "Tableau"],
         viewLink: "#project2"
     },
     {
         id: 3,
-        title: "Project Three",
-        description: "Showcase of your creative skills",
-        image: "/pictures/project3.jpg",
-        stack: ["Vue.js", "Node.js", "MongoDB"],
-        viewLink: "#project3"
+        title: "MotorPH Sales Dashboard",
+        description: " A school project where MotorPH’s Business Analysis Report is a data-driven 2025 study showing that the company has stable sales, diverse inventory, and strong readiness to expand into physical stores across the Philippines.",
+        image: "/pictures/Screenshot 2026-04-07 162859.png",
+        stack: ["Google Worksheets"],
+        viewLink: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSf9pdXIjBNbttqoG829u0XZzaPNQqXeIEwKgjyYjB6lwPS9koRdJUu9Y49x0GrBO3Pr1BWozHYusx7/pubhtml?gid=33346753&single=true"
     },
 ];
 
 export function Projects() {
+    const t = useTranslations('projects')
     return (
         <section id="projects" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
             <div className="w-full max-w-6xl">
                 {/* Title */}
                 <div className="mb-12 text-center">
                     <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-                        <span className="text-white">Selected</span>{" "}
-                        <span className="text-orange-500">Projects</span>
+                        <span className="text-white">{t('titlePrefix')}</span>{" "}
+                        <span className="text-orange-500">{t('titleSuffix')}</span>
                     </h2>
                     <p className="text-gray-400 text-lg">
-                        Some works that highlight my expertise.
+                        {t('subtitle')}
                     </p>
                 </div>
 
@@ -56,17 +58,17 @@ export function Projects() {
                     {projects.map((project) => (
                         <div
                             key={project.id}
-                            className="project-card group relative overflow-hidden rounded-lg h-64 cursor-pointer"
+                            className="project-card group relative h-64 cursor-pointer rounded-lg overflow-hidden"
                         >
-                            {/* Blurred Image Background */}
+                            {/* Image */}
                             <img
                                 src={project.image}
                                 alt={project.title}
-                                className="w-full h-full object-cover project-image blur-sm group-hover:blur-none transition-all duration-300"
+                                className="w-full h-full object-contain bg-gray-900"
                             />
 
-                            {/* Overlay with Details */}
-                            <div className="project-overlay absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 rounded-lg bg-black/90 flex flex-col items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <h3 className="text-xl font-bold text-white text-center mb-2">
                                     {project.title}
                                 </h3>
