@@ -4,7 +4,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig = {
     reactStrictMode: true,
-    webpack: (config: any) => {
+    webpack: (config) => {
         config.module.rules.push({
             test: /\.(glb|gltf)$/,
             type: 'asset/resource',
