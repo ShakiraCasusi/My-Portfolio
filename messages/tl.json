@@ -1,12 +1,12 @@
 {
     "nav": {
         "home": "Tahanan",
-        "about": "Tungkol",
+        "about": "Tungkol Sa Akin",
         "projects": "Mga Proyekto",
         "contact": "Makipag-ugnayan"
     },
     "hero": {
-        "greeting": "Halo, ako ay",
+        "greeting": "Kumusta, ako nga pala si",
         "description": "Binabago ang mga ideya sa mataas na impact na karanasan sa digital. Espesyalista sa UI/UX, Web Dev, at Content Strategy. Lumilikha ako ng functional art para sa modernong web—mula sa unang pixel hanggang sa final edit.",
         "viewProjects": "Tingnan ang Mga Proyekto",
         "contactMe": "Makipag-ugnayan Sa Akin",
@@ -20,7 +20,7 @@
         "description1": "Ang aking digital journey ay nagsimula sa unang taon ng college, na pinaglalakbayan ng passion para sa public service at leadership. Lagi kong naniniwala na ang technology ay pinakamahusay kapag nagsisilbi sa mga tao, at naglalayong gabayan ang mga negosyo at indibidwal tungo sa mga solusyon na tunay na nakakaapekto.",
         "description2": "Sa kasalukuyan, nag-major ako sa Software Development sa Mapúa Malayan Colleges Laguna, pinagsasama ang technical expertise sa malakas na communication at leadership skills. Ang unique synergy na ito ay nagpapahintulot sa akin na pamahalaan ang complex projects habang sinisiguro na bawat digital solution ay functional at human-centered.",
         "experience": "Taong Karanasan",
-        "projects": "Proyektong Tapos",
+        "projects": "Proyektong Natapos",
         "clients": "Masayang Kliyente",
         "downloadCv": "I-download ang CV"
     },

@@ -8,12 +8,8 @@ import { useState } from 'react';
 const languages = [
     { code: 'en', name: 'English', label: 'ENG' },
     { code: 'tl', name: 'Tagalog', label: 'TGL' },
-    { code: 'ceb', name: 'Cebuano', label: 'CEB' },
+    { code: 'akl', name: 'Aklanon', label: 'AKL' },
     { code: 'ko', name: 'Korean', label: 'KOR' },
-    { code: 'ja', name: 'Japanese', label: 'JPN' },
-    { code: 'zh', name: 'Chinese', label: 'CHI' },
-    { code: 'de', name: 'German', label: 'DEU' },
-    { code: 'id', name: 'Indonesian', label: 'IDN' },
 ];
 
 export function LanguageSwitcher() {
@@ -52,8 +48,8 @@ export function LanguageSwitcher() {
                             key={lang.code}
                             onClick={() => handleLanguageChange(lang.code)}
                             className={`w-full text-left px-4 py-2 flex items-center gap-2 transition-colors ${locale === lang.code
-                                    ? 'bg-orange-400/20 text-orange-400'
-                                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                                ? 'bg-orange-400/20 text-orange-400'
+                                : 'text-gray-300 hover:bg-white/5 hover:text-white'
                                 }`}
                         >
                             <Globe size={14} />

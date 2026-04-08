@@ -19,7 +19,7 @@ const certifications: Certification[] = [
         issuer: 'Coursera',
         date: '2024',
         image: '/pictures/How to Design FB and IG.jpeg',
-        description: 'Learned how to use Canva to design Facebook and Instagram stories and to know the importance of using stories for social media.',
+        description: 'Learned how to use Canva to design Facebook and Instagram stories.',
     },
     {
         id: '2',

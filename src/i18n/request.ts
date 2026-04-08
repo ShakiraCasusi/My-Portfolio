@@ -1,11 +1,14 @@
 import { getRequestConfig } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
-export const locales = ['en', 'tl', 'ceb', 'ko', 'ja', 'zh', 'de', 'id'] as const;
+export const locales = ['en', 'tl', 'akl', 'ko'] as const;
 export type Locale = (typeof locales)[number];
 
-export default getRequestConfig(async () => {
-    // The plugin automatically provides the locale from the URL
-    const locale = 'en';
+export default getRequestConfig(async ({ locale }: any) => {
+    // Validate locale
+    if (!locales.includes(locale as Locale)) {
+        notFound();
+    }
 
     return {
         locale,
