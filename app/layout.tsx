@@ -7,6 +7,9 @@ type Props = {
 };
 
 export const metadata: Metadata = {
+    icons: {
+        icon: '/favicon.ico',
+    },
     title: "Shakira Angela | Portfolio",
     description: "A modern personal portfolio built with Next.js and Tailwind CSS",
 }

@@ -3,7 +3,6 @@ import { Navbar } from "@/components/layout/Navbar"
 import { ReactNode } from "react"
 import { locales } from "@/src/i18n/request"
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
 
 export function generateStaticParams() {
     return locales.map((locale) => ({ locale }));
@@ -15,12 +14,20 @@ type Props = {
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
-    // Validate that the incoming `locale` parameter is valid
-    if (!locales.includes(params.locale as any)) {
+    // Ensure locale is valid
+    if (!params.locale || !locales.includes(params.locale as any)) {
         notFound();
     }
 
-    const messages = await getMessages();
+    // Now get messages with valid locale
+    let messages;
+    try {
+        const locale = params.locale as string;
+        messages = (await import(`@/messages/${locale}.json`)).default;
+    } catch (error) {
+        console.error('[LocaleLayout] Failed to get messages:', error);
+        notFound();
+    }
 
     return (
         <NextIntlClientProvider messages={messages}>

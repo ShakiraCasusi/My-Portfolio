@@ -11,6 +11,10 @@ const nextConfig = {
         });
         return config;
     },
+    experimental: {
+        // Enable more aggressive static generation
+        optimizePackageImports: ['next-intl'],
+    },
 };
 
 export default withNextIntl(nextConfig);
