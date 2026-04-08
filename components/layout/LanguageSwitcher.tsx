@@ -21,10 +21,25 @@ export function LanguageSwitcher() {
     const currentLanguage = languages.find(lang => lang.code === locale);
 
     const handleLanguageChange = (newLocale: string) => {
-        // Remove the current locale from the pathname
-        const segments = pathname.split('/');
-        segments[1] = newLocale;
-        const newPathname = segments.join('/');
+        // Replace current locale with new locale in pathname
+        // Pattern: /locale/path or /locale (and handle root case)
+        let newPathname = pathname;
+
+        if (pathname === '/' || pathname === '') {
+            // Root path: redirect to new locale root
+            newPathname = `/${newLocale}`;
+        } else {
+            // Replace the first locale segment safely
+            // Pathname format: /locale/... → replace /locale with /newLocale
+            const pathSegments = pathname.split('/').filter(Boolean); // remove empty strings
+            if (pathSegments.length > 0 && ['en', 'tl', 'akl', 'ko'].includes(pathSegments[0])) {
+                pathSegments[0] = newLocale;
+                newPathname = '/' + pathSegments.join('/');
+            } else {
+                // Fallback for unexpected format
+                newPathname = `/${newLocale}`;
+            }
+        }
 
         router.push(newPathname);
         setIsOpen(false);
@@ -34,10 +49,10 @@ export function LanguageSwitcher() {
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-normal"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-normal h-6 whitespace-nowrap"
                 title={currentLanguage?.name}
             >
-                <Globe size={16} />
+                <Globe size={16} className="flex-shrink-0" />
                 <span>{currentLanguage?.label}</span>
             </button>
 
@@ -47,14 +62,14 @@ export function LanguageSwitcher() {
                         <button
                             key={lang.code}
                             onClick={() => handleLanguageChange(lang.code)}
-                            className={`w-full text-left px-4 py-2 flex items-center gap-2 transition-colors ${locale === lang.code
+                            className={`w-full text-left px-4 py-2 flex items-center gap-2 transition-colors text-sm h-10 ${locale === lang.code
                                 ? 'bg-orange-400/20 text-orange-400'
                                 : 'text-gray-300 hover:bg-white/5 hover:text-white'
                                 }`}
                         >
-                            <Globe size={14} />
-                            <span>{lang.label}</span>
-                            <span className="text-xs text-gray-500">({lang.name})</span>
+                            <Globe size={16} className="flex-shrink-0" />
+                            <span className="flex-1">{lang.label}</span>
+                            <span className="text-xs text-gray-500 flex-shrink-0">({lang.name})</span>
                         </button>
                     ))}
                 </div>
