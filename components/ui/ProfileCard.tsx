@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 import './ProfileCard.css';
 
 const ANIMATION_CONFIG = {
@@ -261,11 +262,11 @@ const ProfileCardComponent = ({
         <div ref={wrapRef} className={`card-wrapper ${className}`.trim()}>
             <div ref={shellRef} className="card-shell">
                 <div className="card">
-                    <img
+                    <Image
                         className="card-image"
                         src={avatarUrl}
                         alt="Profile"
-                        loading="lazy"
+                        fill
                     />
                 </div>
             </div>

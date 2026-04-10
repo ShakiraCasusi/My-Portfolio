@@ -5,8 +5,9 @@ import { FaGithub, FaBehance, FaInstagram } from 'react-icons/fa'
 import { AiFillTikTok } from 'react-icons/ai'
 import { FiLinkedin } from 'react-icons/fi'
 
+const positions = ['Social Media Manager', 'Video Editor', 'Graphic Designer', 'UI/UX Designer', 'Web Developer']
+
 export function ScrollingText() {
-    const positions = ['Social Media Manager', 'Video Editor', 'Graphic Designer', 'UI/UX Designer', 'Web Developer']
     const [currentIndex, setCurrentIndex] = useState(0)
 
     useEffect(() => {

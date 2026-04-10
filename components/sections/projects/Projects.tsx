@@ -1,4 +1,5 @@
 import "./Projects.css";
+import Image from "next/image";
 
 interface ProjectCard {
     id: number;
@@ -59,10 +60,12 @@ export function Projects() {
                             className="project-card group relative h-64 cursor-pointer rounded-lg overflow-hidden"
                         >
                             {/* Image */}
-                            <img
+                            <Image
                                 src={project.image}
                                 alt={project.title}
-                                className="w-full h-full object-contain bg-gray-900"
+                                fill
+                                className="object-contain bg-gray-900"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
 
                             {/* Hover Overlay */}
