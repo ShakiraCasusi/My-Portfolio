@@ -34,12 +34,12 @@ export function ScrollToTop() {
             {isVisible && (
                 <button
                     onClick={scrollToHero}
-                    className="fixed bottom-8 right-8 z-40 group"
+                    className="fixed bottom-8 right-8 z-40"
                     aria-label="Scroll to top"
                 >
-                    <div className="relative w-12 h-12 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-orange-500/50 hover:scale-110">
+                    <div className="relative w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center shadow-lg">
                         <svg
-                            className="w-6 h-6 text-white transform group-hover:-translate-y-1 transition-transform"
+                            className="w-6 h-6 text-white"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                         >
