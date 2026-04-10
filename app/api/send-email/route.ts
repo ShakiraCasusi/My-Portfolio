@@ -27,22 +27,15 @@ export async function POST(request: NextRequest) {
         // Get environment variables
         const resendApiKey = process.env.RESEND_API_KEY;
         const contactToEmail = process.env.CONTACT_TO_EMAIL;
-        const contactFromEmail = process.env.CONTACT_FROM_EMAIL || 'noreply@yourdomain.com';
+        const contactFromEmail = process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev';
 
         // Log the message for debugging
         console.log('Contact form submission:', { name, email: email || 'Not provided', message });
 
-        // If Resend API is not configured, just log and return success (for development)
         if (!resendApiKey || !contactToEmail) {
-            console.warn('Email service not fully configured. Contact info logged to console.');
-            console.log('Message from', name, email ? '(' + email + ')' : '(No email provided):', message);
-
             return NextResponse.json(
-                {
-                    success: true,
-                    message: 'Message received! Thank you for reaching out.'
-                },
-                { status: 200 }
+                { error: 'Email configuration missing on server. Check Environment Variables.' },
+                { status: 500 }
             );
         }
 

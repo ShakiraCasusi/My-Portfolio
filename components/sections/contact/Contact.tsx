@@ -188,6 +188,19 @@ export function Contact() {
                                     />
                                 </div>
 
+                                {/* Email Input */}
+                                <div>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder={contactStrings.emailPlaceholder}
+                                        className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
+                                        required
+                                    />
+                                </div>
+
                                 {/* Message Textarea */}
                                 <div>
                                     <textarea
