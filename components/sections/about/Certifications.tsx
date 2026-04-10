@@ -26,7 +26,7 @@ const certifications: Certification[] = [
         title: 'Foundations of User Experience (UX) Design',
         issuer: 'Google via Coursera',
         date: '2024',
-        image: '/pictures/Foundations of UX.jpeg',
+        image: '/pictures/Foundations of UX.jpg',
         description: 'Understand foundational concepts in UX design, such as user-centered design, the design process, accessibility, and equity-focused design. ',
     },
     {
@@ -81,7 +81,7 @@ export default function Certifications() {
                                     alt={cert.title}
                                     fill
                                     className="cert-image"
-                                    objectFit="contain"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             ) : (
                                 <svg className="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

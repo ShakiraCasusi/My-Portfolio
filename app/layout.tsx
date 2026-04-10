@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "@/styles/globals.css"
 import { cn } from "@/lib/utils"
+import { ScrollToTop } from "@/components/ScrollToTop"
 
 type Props = {
     children: React.ReactNode;
@@ -21,6 +22,7 @@ export default function RootLayout({
         <html className={cn("dark", "font-sans")} lang="en">
             <body className="bg-slate-950">
                 {children}
+                <ScrollToTop />
             </body>
         </html>
     );

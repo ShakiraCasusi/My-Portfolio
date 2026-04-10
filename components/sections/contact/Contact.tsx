@@ -8,7 +8,7 @@ export function Contact() {
         subtitle: 'I am always open to new projects or just a chat. Send your signal.',
         status: 'SYSTEM STATUS: ONLINE',
         email: 'Email',
-        whatsapp: 'WhatsApp',
+        call: 'Call',
         uplink: 'ESTABLISHING UPLINK...',
         formTitle: 'Initiate Data Transmission',
         senderID: 'Sender ID / Name',
@@ -26,6 +26,7 @@ export function Contact() {
         message: ''
     });
     const [loading, setLoading] = useState(false);
+    const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -38,6 +39,7 @@ export function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setFeedback(null);
 
         try {
             // Send email using API endpoint
@@ -56,13 +58,16 @@ export function Contact() {
             if (response.ok) {
                 // Reset form after submission
                 setFormData({ name: '', email: '', frequency: '', message: '' });
-                alert(contactStrings.success);
+                setFeedback({ type: 'success', message: 'Message sent successfully! I\'ll be in touch soon.' });
+                setTimeout(() => setFeedback(null), 5000);
             } else {
-                alert(contactStrings.error);
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.error || 'Failed to send message. Please check your input and try again.';
+                setFeedback({ type: 'error', message: errorMessage });
             }
         } catch (error) {
             console.error('Error sending message:', error);
-            alert(contactStrings.error);
+            setFeedback({ type: 'error', message: 'Network error. Please check your connection and try again.' });
         } finally {
             setLoading(false);
         }
@@ -115,21 +120,19 @@ export function Contact() {
                                     </div>
                                 </a>
 
-                                {/* WhatsApp Card */}
+                                {/* Phone Card */}
                                 <a
-                                    href="https://wa.me/639482599773"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href="tel:+639482599773"
                                     className="contact-card group"
                                 >
                                     <div className="flex items-center gap-3 p-4 rounded-lg border border-orange-400/30 hover:border-orange-400/60 hover:bg-orange-400/5 transition-all duration-300">
-                                        <div className="whatsapp-icon w-10 h-10 rounded-lg bg-orange-400/20 flex items-center justify-center flex-shrink-0">
+                                        <div className="phone-icon w-10 h-10 rounded-lg bg-orange-400/20 flex items-center justify-center flex-shrink-0">
                                             <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+                                                <path d="M22.5 1h-21C.6 1 0 1.6 0 2.5v19C0 22.4.6 23 1.5 23h21c.9 0 1.5-.6 1.5-1.5v-19C24 1.6 23.4 1 22.5 1zm-4 21H5.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5h13c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5zm4-4H1.5V4h21v14z" />
                                             </svg>
                                         </div>
                                         <div>
-                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{contactStrings.whatsapp}</p>
+                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{contactStrings.call}</p>
                                             <p className="text-white font-medium text-xs">+63 948 259 9773</p>
                                         </div>
                                     </div>
@@ -160,6 +163,16 @@ export function Contact() {
                                 </h3>
                             </div>
 
+                            {/* Feedback Message */}
+                            {feedback && (
+                                <div className={`mb-4 p-3 rounded-lg text-sm ${feedback.type === 'success'
+                                    ? 'bg-green-500/20 border border-green-500/50 text-green-400'
+                                    : 'bg-red-500/20 border border-red-500/50 text-red-400'
+                                    }`}>
+                                    {feedback.message}
+                                </div>
+                            )}
+
                             {/* Form */}
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 {/* Name Input */}
@@ -170,19 +183,6 @@ export function Contact() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         placeholder={contactStrings.senderID}
-                                        className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
-                                        required
-                                    />
-                                </div>
-
-                                {/* Email Input */}
-                                <div>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder={contactStrings.emailPlaceholder}
                                         className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
                                         required
                                     />
