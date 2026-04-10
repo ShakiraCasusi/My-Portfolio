@@ -69,7 +69,7 @@ export function Navbar() {
                                         backgroundColor: activeSection === item.id ? '#fb923c' : 'transparent'
                                     }}></div>
                                 </div>
-                            ))})
+                            ))}
                         </div>
                     </div>
 
