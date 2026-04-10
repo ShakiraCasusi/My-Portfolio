@@ -9,9 +9,9 @@ type Props = {
 
 export const metadata: Metadata = {
     icons: {
-        icon: '/favicon.ico',
+        icon: '/puzzlelabs.dev',
     },
-    title: "Shakira Angela | Portfolio",
+    title: "Shakira Angela | Creative Developer ",
     description: "A modern personal portfolio built with Next.js and Tailwind CSS",
 }
 
