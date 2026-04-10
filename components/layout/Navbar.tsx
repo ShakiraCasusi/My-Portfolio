@@ -1,11 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
-import { LanguageSwitcher } from './LanguageSwitcher'
 
 export function Navbar() {
-    const t = useTranslations('nav')
     const [activeSection, setActiveSection] = useState('hero')
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -31,10 +28,10 @@ export function Navbar() {
     }, [])
 
     const navItems = [
-        { id: 'hero', label: t('home') },
-        { id: 'about', label: t('about') },
-        { id: 'projects', label: t('projects') },
-        { id: 'contact', label: t('contact') }
+        { id: 'hero', label: 'Home' },
+        { id: 'about', label: 'About' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'contact', label: 'Contact' }
     ]
 
     const handleNavClick = (sectionId: string) => {
@@ -72,11 +69,7 @@ export function Navbar() {
                                         backgroundColor: activeSection === item.id ? '#fb923c' : 'transparent'
                                     }}></div>
                                 </div>
-                            ))}
-                            {/* Language Switcher with Pipe Separator */}
-                            <div className="flex items-center gap-3 pl-3 border-l border-white/10">
-                                <LanguageSwitcher />
-                            </div>
+                            ))})
                         </div>
                     </div>
 
@@ -109,10 +102,6 @@ export function Navbar() {
                                     {item.label}
                                 </a>
                             ))}
-                            {/* Language Switcher - Mobile */}
-                            <div className="px-3 py-2 border-t border-white/10 pt-3">
-                                <LanguageSwitcher />
-                            </div>
                         </div>
                     </div>
                 )}

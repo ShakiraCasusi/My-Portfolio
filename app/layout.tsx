@@ -18,7 +18,7 @@ export default function RootLayout({
     children,
 }: Props) {
     return (
-        <html className={cn("dark", "font-sans")}>
+        <html className={cn("dark", "font-sans")} lang="en">
             <body className="bg-slate-950">
                 {children}
             </body>

@@ -1,13 +1,17 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { ScrollingText, TypingEffect, SocialIcons } from './HeroHelpers'
 import { MdArrowOutward } from 'react-icons/md'
 import ProfileCard from '@/components/ui/ProfileCard'
 
 export function Hero() {
-    const t = useTranslations('hero')
-    const description = t('description')
+    const greeting = 'Hello, I am'
+    const description = 'Transforming ideas into high-impact digital experiences. Specialist in UI/UX, Web Dev, and Content Strategy. I create functional art for the modern web—from the first pixel to the final edit.'
+    const viewProjects = 'View Projects'
+    const contactMe = 'Contact Me'
+    const profileName = 'Shakira Angela Agudo Casusi'
+    const profileTitle = 'Developer & Designer'
+    const profileStatus = 'Available'
 
     return (
         <section
@@ -21,7 +25,7 @@ export function Hero() {
                         {/* Greeting and Name */}
                         <div className="flex flex-col gap-0">
                             <p className="text-1xl lg:text-2xl font-normal text-gray-400 uppercase" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                                {t('greeting')}
+                                {greeting}
                             </p>
                             <h1 className="text-5xl lg:text-6xl font-bold text-white leading-none tracking-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>
                                 Shakira Angela
@@ -51,14 +55,14 @@ export function Hero() {
                                 href="#projects"
                                 className="px-6 py-2.5 bg-orange-400/40 text-white font-bold text-sm border-2 border-orange-400/40 rounded-full transition-all hover:bg-orange-400/60 hover:border-orange-400/60 tracking-tight flex items-center gap-2" style={{ fontFamily: "'Outfit', sans-serif" }}
                             >
-                                {t('viewProjects')}
+                                {viewProjects}
                                 <MdArrowOutward size={16} />
                             </a>
                             <a
                                 href="#contact"
                                 className="px-6 py-2.5 text-gray-400 font-bold text-sm border-2 border-gray-400 rounded-full transition-all hover:text-white hover:border-white tracking-tight" style={{ fontFamily: "'Outfit', sans-serif" }}
                             >
-                                {t('contactMe')}
+                                {contactMe}
                             </a>
                         </div>
                     </div>
@@ -66,11 +70,11 @@ export function Hero() {
                     {/* Right Column - Profile Card */}
                     <div className="flex items-center justify-center mt-8 lg:mt-0">
                         <ProfileCard
-                            name={t('profileName')}
-                            title={t('profileTitle')}
+                            name={profileName}
+                            title={profileTitle}
                             handle="shakira"
-                            status={t('profileStatus')}
-                            contactText={t('contactMe')}
+                            status={profileStatus}
+                            contactText={contactMe}
                             avatarUrl="/pictures/464751278_567183799036449_3163974364779314123_n.jpg"
                             showUserInfo={true}
                             enableTilt={true}

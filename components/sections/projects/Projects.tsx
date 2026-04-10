@@ -1,5 +1,4 @@
 import "./Projects.css";
-import { useTranslations } from 'next-intl';
 
 interface ProjectCard {
     id: number;
@@ -38,18 +37,17 @@ const projects: ProjectCard[] = [
 ];
 
 export function Projects() {
-    const t = useTranslations('projects')
     return (
-        <section id="projects" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+        <section id="projects" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20/">
             <div className="w-full max-w-6xl">
                 {/* Title */}
                 <div className="mb-12 text-center">
                     <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-                        <span className="text-white">{t('titlePrefix')}</span>{" "}
-                        <span className="text-orange-500">{t('titleSuffix')}</span>
+                        <span className="text-white">Selected</span>{" "}
+                        <span className="text-orange-500">Projects</span>
                     </h2>
                     <p className="text-gray-400 text-lg">
-                        {t('subtitle')}
+                        Some works that highlight my expertise.
                     </p>
                 </div>
 

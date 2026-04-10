@@ -1,11 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
 import './Contact.css';
 
 export function Contact() {
-    const t = useTranslations('contact');
+    const contactStrings = {
+        subtitle: 'I am always open to new projects or just a chat. Send your signal.',
+        status: 'SYSTEM STATUS: ONLINE',
+        email: 'Email',
+        whatsapp: 'WhatsApp',
+        uplink: 'ESTABLISHING UPLINK...',
+        formTitle: 'Initiate Data Transmission',
+        senderID: 'Sender ID / Name',
+        emailPlaceholder: 'Email Address',
+        messagePlaceholder: 'Message Transmission Data',
+        submit: 'Initiate Transmission',
+        sending: 'Sending...',
+        success: 'Message sent successfully!',
+        error: 'Error sending message. Please try again.'
+    };
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -43,13 +56,13 @@ export function Contact() {
             if (response.ok) {
                 // Reset form after submission
                 setFormData({ name: '', email: '', frequency: '', message: '' });
-                alert(t('success'));
+                alert(contactStrings.success);
             } else {
-                alert(t('error'));
+                alert(contactStrings.error);
             }
         } catch (error) {
             console.error('Error sending message:', error);
-            alert(t('error'));
+            alert(contactStrings.error);
         } finally {
             setLoading(false);
         }
@@ -65,7 +78,7 @@ export function Contact() {
                         <span className="text-orange-500">Connect</span>
                     </h2>
                     <p className="text-gray-400 text-lg">
-                        {t('subtitle')}
+                        {contactStrings.subtitle}
                     </p>
                 </div>
 
@@ -78,7 +91,7 @@ export function Contact() {
                             <div className="flex items-center gap-3">
                                 <div className="blinking-dot"></div>
                                 <span className="text-orange-500 font-bold text-sm tracking-wider">
-                                    {t('status')}
+                                    {contactStrings.status}
                                 </span>
                             </div>
 
@@ -96,7 +109,7 @@ export function Contact() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{t('email')}</p>
+                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{contactStrings.email}</p>
                                             <p className="text-white font-medium text-xs">casusishakira28@gmail.com</p>
                                         </div>
                                     </div>
@@ -116,7 +129,7 @@ export function Contact() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{t('whatsapp')}</p>
+                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{contactStrings.whatsapp}</p>
                                             <p className="text-white font-medium text-xs">+63 948 259 9773</p>
                                         </div>
                                     </div>
@@ -131,7 +144,7 @@ export function Contact() {
                                 <svg className="w-4 h-4 text-gray-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                                 </svg>
-                                <span className="text-gray-500">{t('uplink')}</span>
+                                <span className="text-gray-500">{contactStrings.uplink}</span>
                             </div>
                         </div>
 
@@ -143,7 +156,7 @@ export function Contact() {
                                     <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.9429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99621575 L3.03521743,10.4371088 C3.03521743,10.5942061 3.19218622,10.7513035 3.50612381,10.7513035 L16.6915026,11.5367905 C16.6915026,11.5367905 17.1624089,11.5367905 17.1624089,12.0080827 C17.1624089,12.4793748 16.6915026,12.4744748 16.6915026,12.4744748 Z" />
                                 </svg>
                                 <h3 className="text-white font-bold uppercase tracking-wider text-sm">
-                                    {t('formTitle')}
+                                    {contactStrings.formTitle}
                                 </h3>
                             </div>
 
@@ -156,7 +169,7 @@ export function Contact() {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        placeholder={t('senderID')}
+                                        placeholder={contactStrings.senderID}
                                         className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
                                         required
                                     />
@@ -169,7 +182,7 @@ export function Contact() {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        placeholder={t('emailPlaceholder')}
+                                        placeholder={contactStrings.emailPlaceholder}
                                         className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
                                         required
                                     />
@@ -181,7 +194,7 @@ export function Contact() {
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        placeholder={t('messagePlaceholder')}
+                                        placeholder={contactStrings.messagePlaceholder}
                                         className="w-full h-24 bg-white/5 border border-white/10 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-orange-400/50 placeholder-gray-500 transition-colors resize-none text-sm"
                                         required
                                     ></textarea>
@@ -193,7 +206,7 @@ export function Contact() {
                                     disabled={loading}
                                     className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg transition-all duration-300 uppercase tracking-wider flex items-center justify-center gap-2 disabled:opacity-50 text-sm"
                                 >
-                                    {loading ? t('sending') : t('submit')}
+                                    {loading ? contactStrings.sending : contactStrings.submit}
                                     <span>→</span>
                                 </button>
                             </form>
