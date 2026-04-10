@@ -132,7 +132,7 @@ export function About() {
                             {/* Download CV Button */}
                             <div className="pt-4">
                                 <a
-                                    href="/cv.pdf"
+                                    href="/Resume.pdf"
                                     download
                                     className="inline-flex items-center gap-2 px-6 py-3 border-2 border-orange-400/60 text-orange-300 font-bold rounded-full hover:bg-orange-400/10 transition-all" style={{ fontFamily: "'Outfit', sans-serif" }}
                                 >
