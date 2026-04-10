@@ -1,0 +1,1 @@
+// DELETE THIS FILE - Use /app/api/send-email/route.ts instead to avoid URL encoding issues.
