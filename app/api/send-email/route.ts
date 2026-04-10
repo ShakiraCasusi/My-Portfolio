@@ -13,9 +13,6 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Use provided email or a placeholder for reply
-        const senderEmail = email || 'noreply@contact-form.local';
-
         // Validate email format only if provided
         if (email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
