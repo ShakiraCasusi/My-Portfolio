@@ -1,0 +1,102 @@
+.skillList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(3.75rem, 1fr));
+    gap: 0.9rem 0.65rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.skillItem {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.skillIcon {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(251 146 60 / 20%);
+    border-radius: 1rem;
+    background: rgb(251 146 60 / 8%);
+    color: #fed7aa;
+    cursor: help;
+    outline: none;
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease;
+}
+
+.skillIcon:hover,
+.skillIcon:focus-visible {
+    z-index: 2;
+    transform: scale(1.12);
+    border-color: rgb(251 146 60 / 55%);
+    background: rgb(251 146 60 / 15%);
+}
+
+.skillIcon::after {
+    position: absolute;
+    z-index: 5;
+    top: calc(100% + 0.65rem);
+    left: 50%;
+    width: max-content;
+    max-width: 13rem;
+    padding: 0.4rem 0.65rem;
+    transform: translate(-50%, -0.2rem);
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 0.5rem;
+    background: #171326;
+    color: #fff;
+    content: attr(data-tooltip);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.25;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 150ms ease,
+        transform 150ms ease;
+    visibility: hidden;
+}
+
+.skillIcon:hover::after,
+.skillIcon:focus-visible::after {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.devicon {
+    color: #fff;
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.simpleIcon,
+.customIcon {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.simpleIcon {
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.customIcon {
+    color: currentColor;
+    stroke-width: 1.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skillIcon,
+    .skillIcon::after {
+        transition: none;
+    }
+}

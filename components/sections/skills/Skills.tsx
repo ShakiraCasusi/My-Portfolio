@@ -1,29 +1,111 @@
-const skillGroups = [
+import { BrainCircuit, Clapperboard, MessageSquareText, ShieldCheck } from "lucide-react"
+import styles from "./Skills.module.css"
+
+type Skill = {
+    name: string
+    devicon?: string
+    simpleIcon?: string
+    customIcon?: "security" | "ai" | "prompt" | "video"
+}
+
+type SkillGroup = {
+    title: string
+    skills: Skill[]
+    level?: string
+    note?: string
+}
+
+const skillGroups: SkillGroup[] = [
+    {
+        title: "UI & Visual Design",
+        skills: [
+            { name: "Figma", devicon: "devicon-figma-plain" },
+            { name: "Canva", devicon: "devicon-canva-plain" },
+            { name: "CapCut", customIcon: "video" },
+            { name: "Adobe Photoshop", devicon: "devicon-photoshop-plain" },
+        ],
+    },
+    {
+        title: "Data Analytics & Productivity",
+        skills: [
+            {
+                name: "Tableau",
+                simpleIcon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tableau.svg",
+            },
+            { name: "Notion", simpleIcon: "https://cdn.simpleicons.org/notion/ffffff" },
+        ],
+    },
     {
         title: "Web Development",
-        skills: ["HTML", "CSS", "Bootstrap", "JavaScript"],
+        level: "Foundational / AI-Assisted",
+        note: "Foundational knowledge built through academic projects with AI-assisted development.",
+        skills: [
+            { name: "HTML", devicon: "devicon-html5-plain" },
+            { name: "CSS", devicon: "devicon-css3-plain" },
+            { name: "Bootstrap", devicon: "devicon-bootstrap-plain" },
+            { name: "JavaScript", devicon: "devicon-javascript-plain" },
+        ],
     },
     {
         title: "Backend & Cloud",
-        skills: ["Node.js", "Express.js", "AWS", "AWS S3", "Helmet.js"],
-    },
-    {
-        title: "Data & Analytics",
-        skills: ["Tableau"],
-    },
-    {
-        title: "UI/UX & Visual Design",
-        skills: ["Figma", "Canva", "CapCut"],
+        level: "Foundational / AI-Assisted",
+        note: "Foundational knowledge built through academic projects with AI-assisted development.",
+        skills: [
+            { name: "Node.js", devicon: "devicon-nodejs-plain" },
+            { name: "Express.js", devicon: "devicon-express-original" },
+            { name: "AWS (S3)", devicon: "devicon-amazonwebservices-plain" },
+            { name: "Helmet.js", customIcon: "security" },
+        ],
     },
     {
         title: "Tools & Version Control",
-        skills: ["Git", "GitHub"],
+        skills: [
+            { name: "Git", devicon: "devicon-git-plain" },
+            { name: "GitHub", devicon: "devicon-github-original" },
+        ],
     },
     {
         title: "Emerging Technology",
-        skills: ["AI Engineering"],
+        skills: [
+            { name: "AI Engineering", customIcon: "ai" },
+            { name: "Prompt Engineering", customIcon: "prompt" },
+        ],
     },
 ]
+
+function SkillIcon({ skill }: { skill: Skill }) {
+    if (skill.devicon) {
+        return <i className={`${skill.devicon} ${styles.devicon}`} aria-hidden="true" />
+    }
+
+    if (skill.simpleIcon) {
+        return (
+            <img
+                className={styles.simpleIcon}
+                src={skill.simpleIcon}
+                alt=""
+                width="28"
+                height="28"
+                loading="lazy"
+                aria-hidden="true"
+            />
+        )
+    }
+
+    if (skill.customIcon === "security") {
+        return <ShieldCheck className={styles.customIcon} aria-hidden="true" />
+    }
+
+    if (skill.customIcon === "ai") {
+        return <BrainCircuit className={styles.customIcon} aria-hidden="true" />
+    }
+
+    if (skill.customIcon === "video") {
+        return <Clapperboard className={styles.customIcon} aria-hidden="true" />
+    }
+
+    return <MessageSquareText className={styles.customIcon} aria-hidden="true" />
+}
 
 export function Skills() {
     return (
@@ -47,21 +129,31 @@ export function Skills() {
                             key={group.title}
                             className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-colors hover:border-orange-400/30 hover:bg-white/[0.06]"
                         >
-                            <h3 className="mb-5 text-lg font-semibold text-white">
+                            <h3 className="text-lg font-semibold text-white">
                                 {group.title}
                             </h3>
-                            <ul className="flex flex-wrap gap-2.5">
+                            {group.note && (
+                                <div className="mt-3 space-y-2.5">
+                                    <span className="inline-flex rounded-full border border-orange-400/20 bg-orange-400/10 px-2.5 py-1 text-xs font-medium text-orange-200">
+                                        {group.level}
+                                    </span>
+                                    <p className="text-sm leading-relaxed text-gray-400">
+                                        {group.note}
+                                    </p>
+                                </div>
+                            )}
+                            <ul className={`${styles.skillList} ${group.note ? "mt-5" : "mt-6"}`}>
                                 {group.skills.map((skill) => (
-                                    <li
-                                        key={skill}
-                                        className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-orange-400/10 px-3.5 py-2 text-sm font-medium text-orange-100"
-                                    >
-                                        {skill}
-                                        {skill === "Helmet.js" && (
-                                            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-gray-300">
-                                                Beginner
-                                            </span>
-                                        )}
+                                    <li key={skill.name} className={styles.skillItem}>
+                                        <span
+                                            className={styles.skillIcon}
+                                            data-tooltip={skill.name}
+                                            role="img"
+                                            aria-label={skill.name}
+                                            tabIndex={0}
+                                        >
+                                            <SkillIcon skill={skill} />
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
