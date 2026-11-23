@@ -66,12 +66,12 @@ const SlotMachineNumber = ({ value }: { value: string }) => {
 export function About() {
     const aboutStrings = {
         title: 'About Me',
-        subtitle: 'Bridging leadership with technical precision.',
-        description1: 'My digital journey began in my first year of college, fueled by a passion for public service and leadership. I\'ve always believed that technology is at its best when it serves people, and I aim to guide businesses and individuals toward solutions that truly make an impact.',
-        description2: 'Currently majoring in Software Development at Mapúa Malayan Colleges Laguna, I combine technical expertise with strong communication and leadership skills. This unique synergy allows me to manage complex projects while ensuring every digital solution is both functional and human-centered.',
-        experience: 'Years Experience',
-        projects: 'Projects Done',
-        clients: 'Happy Clients',
+        subtitle: 'Software Development student creating thoughtful, human-centered digital experiences.',
+        description1: 'I’m a fourth-year BSIT Software Development student at Mapúa Malayan College of Laguna (MMCL), building academic, creative, and personal projects. I’m interested in using technology to solve practical problems and make digital experiences more approachable.',
+        description2: 'My work brings together user-centered UI/UX design, visual creation, and foundational web development. I also use AI-assisted workflows to explore ideas, solve problems, and bring projects from concept to completion.',
+        projects: 'Projects Shown',
+        tools: 'Tools & Platforms',
+        certifications: 'Certifications',
         downloadCv: 'Download CV'
     }
     return (
@@ -116,16 +116,16 @@ export function About() {
                             {/* Stats */}
                             <div className="grid grid-cols-3 gap-6 pt-4">
                                 <div className="text-center">
-                                    <SlotMachineNumber value="3+" />
-                                    <p className="text-gray-400 text-sm uppercase tracking-wide" style={{ fontFamily: "'Outfit', sans-serif" }}>{aboutStrings.experience}</p>
-                                </div>
-                                <div className="text-center">
-                                    <SlotMachineNumber value="20+" />
+                                    <SlotMachineNumber value="6" />
                                     <p className="text-gray-400 text-sm uppercase tracking-wide" style={{ fontFamily: "'Outfit', sans-serif" }}>{aboutStrings.projects}</p>
                                 </div>
                                 <div className="text-center">
-                                    <SlotMachineNumber value="10+" />
-                                    <p className="text-gray-400 text-sm uppercase tracking-wide" style={{ fontFamily: "'Outfit', sans-serif" }}>{aboutStrings.clients}</p>
+                                    <SlotMachineNumber value="27" />
+                                    <p className="text-gray-400 text-sm uppercase tracking-wide" style={{ fontFamily: "'Outfit', sans-serif" }}>{aboutStrings.tools}</p>
+                                </div>
+                                <div className="text-center">
+                                    <SlotMachineNumber value="6" />
+                                    <p className="text-gray-400 text-sm uppercase tracking-wide" style={{ fontFamily: "'Outfit', sans-serif" }}>{aboutStrings.certifications}</p>
                                 </div>
                             </div>
 
