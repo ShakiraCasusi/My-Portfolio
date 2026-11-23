@@ -66,7 +66,7 @@ export function Hero() {
                     {/* Right Column - Profile Card */}
                     <div className="flex items-center justify-center mt-8 lg:mt-0">
                         <ProfileCard
-                            avatarUrl="/pictures/[HERO] Picture 1.jpg"
+                            avatarUrl="/pictures/hero-profile.jpg"
                             enableTilt={true}
                             enableMobileTilt={false}
                         />

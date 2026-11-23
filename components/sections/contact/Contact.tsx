@@ -1,68 +1,76 @@
 'use client';
 
 import { useState } from 'react';
+import { Check, Copy, Mail, Send } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import './Contact.css';
 
+const CONTACT_EMAIL = ['casusishakira28', 'gmail.com'].join('@');
+
+type FormData = {
+    sender_name: string;
+    sender_email: string;
+    message: string;
+};
+
 export function Contact() {
-    const contactStrings = {
-        subtitle: 'I am always open to new projects or just a chat. Send your signal.',
-        status: 'SYSTEM STATUS: ONLINE',
-        email: 'Email',
-        call: 'Call',
-        uplink: 'ESTABLISHING UPLINK...',
-        formTitle: 'Initiate Data Transmission',
-        senderID: 'Sender ID / Name',
-        emailPlaceholder: 'Email Address',
-        messagePlaceholder: 'Message Transmission Data',
-        submit: 'Initiate Transmission',
-        sending: 'Sending...',
-        success: 'Message sent successfully!',
-        error: 'Error sending message. Please try again.'
-    };
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        frequency: '',
-        message: ''
+    const [formData, setFormData] = useState<FormData>({
+        sender_name: '',
+        sender_email: '',
+        message: '',
     });
     const [loading, setLoading] = useState(false);
+    const [emailCopied, setEmailCopied] = useState(false);
+    const [copyError, setCopyError] = useState(false);
     const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        setFormData((previous) => ({
+            ...previous,
+            [name]: value,
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleCopyEmail = async () => {
+        setEmailCopied(false);
+        setCopyError(false);
+
+        if (!navigator.clipboard?.writeText) {
+            setCopyError(true);
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(CONTACT_EMAIL);
+            setEmailCopied(true);
+        } catch (error) {
+            console.error('Unable to copy the contact email:', error);
+            setCopyError(true);
+        }
+    };
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
         setLoading(true);
         setFeedback(null);
 
         try {
-            // Send email using API endpoint
             const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    message: formData.message,
-                }),
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {
-                // Reset form after submission
-                setFormData({ name: '', email: '', frequency: '', message: '' });
-                setFeedback({ type: 'success', message: 'Message sent successfully! I\'ll be in touch soon.' });
+                setFormData({ sender_name: '', sender_email: '', message: '' });
+                setFeedback({ type: 'success', message: "Message sent successfully! I'll be in touch soon." });
                 setTimeout(() => setFeedback(null), 5000);
             } else {
                 const errorData = await response.json().catch(() => ({}));
-                const errorMessage = errorData.error || 'Failed to send message. Please check your input and try again.';
+                const errorMessage = errorData.error || 'Failed to send your message. Please try again.';
                 setFeedback({ type: 'error', message: errorMessage });
             }
         } catch (error) {
@@ -76,151 +84,170 @@ export function Contact() {
     return (
         <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
             <div className="w-full max-w-6xl">
-                {/* Title */}
                 <div className="mb-12 text-center">
                     <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-                        <span className="text-white">Let&apos;s</span>{" "}
+                        <span className="text-white">Let&apos;s</span>{' '}
                         <span className="text-orange-500">Connect</span>
                     </h2>
                     <p className="text-gray-400 text-lg">
-                        {contactStrings.subtitle}
+                        Have a project in mind or want to collaborate? I&apos;d love to hear from you.
                     </p>
                 </div>
 
-                {/* Contact Container */}
                 <div className="contact-container border border-orange-500/30 rounded-2xl overflow-hidden bg-black/40 backdrop-blur-md">
                     <div className="contact-grid">
-                        {/* Left Column - Icons */}
-                        <div className="contact-left bg-black/60 p-8 lg:p-12 flex flex-col justify-between">
-                            {/* System Status */}
+                        <div className="contact-left bg-black/60 p-6 sm:p-8 lg:p-12 flex flex-col justify-between gap-10">
                             <div className="flex items-center gap-3">
-                                <div className="blinking-dot"></div>
+                                <div className="blinking-dot" />
                                 <span className="text-orange-500 font-bold text-sm tracking-wider">
-                                    {contactStrings.status}
+                                    SYSTEM STATUS: ONLINE
                                 </span>
                             </div>
 
-                            {/* Contact Cards */}
                             <div className="space-y-5">
-                                {/* Email Card */}
-                                <a
-                                    href="mailto:casusishakira28@gmail.com"
-                                    className="contact-card group"
-                                >
-                                    <div className="flex items-center gap-3 p-4 rounded-lg border border-orange-400/30 hover:border-orange-400/60 hover:bg-orange-400/5 transition-all duration-300">
-                                        <div className="email-icon w-10 h-10 rounded-lg bg-orange-400/20 flex items-center justify-center flex-shrink-0">
-                                            <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                            </svg>
+                                <div className="contact-card rounded-xl border border-orange-400/30 bg-white/[0.03] p-5 transition-colors hover:border-orange-400/60 hover:bg-orange-400/5">
+                                    <div className="flex items-start gap-4">
+                                        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-orange-400/20 text-orange-400">
+                                            <Mail size={20} aria-hidden="true" />
                                         </div>
-                                        <div>
-                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{contactStrings.email}</p>
-                                            <p className="text-white font-medium text-xs">casusishakira28@gmail.com</p>
+                                        <div className="min-w-0">
+                                            <h3 className="text-sm font-semibold text-white">Email</h3>
+                                            <p className="mt-1 text-sm leading-relaxed text-gray-400">
+                                                Copy my email address to get in touch.
+                                            </p>
+                                            <button
+                                                type="button"
+                                                onClick={handleCopyEmail}
+                                                className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-lg border border-orange-400/40 bg-orange-400/10 px-4 py-2 text-sm font-semibold text-orange-200 transition-colors hover:border-orange-300 hover:bg-orange-400/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
+                                                aria-label={emailCopied ? 'Email address copied' : 'Copy email address'}
+                                            >
+                                                {emailCopied ? (
+                                                    <Check size={16} aria-hidden="true" />
+                                                ) : (
+                                                    <Copy size={16} aria-hidden="true" />
+                                                )}
+                                                {emailCopied ? 'Email Copied' : 'Copy Email'}
+                                            </button>
+                                            {copyError && (
+                                                <p className="mt-2 text-xs text-orange-200" role="status">
+                                                    Clipboard unavailable. Please use the contact form.
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
-                                </a>
+                                </div>
 
-                                {/* Phone Card */}
-                                <a
-                                    href="tel:+639482599773"
-                                    className="contact-card group"
-                                >
-                                    <div className="flex items-center gap-3 p-4 rounded-lg border border-orange-400/30 hover:border-orange-400/60 hover:bg-orange-400/5 transition-all duration-300">
-                                        <div className="phone-icon w-10 h-10 rounded-lg bg-orange-400/20 flex items-center justify-center flex-shrink-0">
-                                            <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M22.5 1h-21C.6 1 0 1.6 0 2.5v19C0 22.4.6 23 1.5 23h21c.9 0 1.5-.6 1.5-1.5v-19C24 1.6 23.4 1 22.5 1zm-4 21H5.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5h13c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5zm4-4H1.5V4h21v14z" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-gray-400 uppercase tracking-wide">{contactStrings.call}</p>
-                                            <p className="text-white font-medium text-xs">+63 948 259 9773</p>
-                                        </div>
+                                <div className="contact-card rounded-xl border border-orange-400/30 bg-white/[0.03] p-5">
+                                    <h3 className="text-sm font-semibold text-white">Professional Socials</h3>
+                                    <div className="mt-4 flex flex-wrap gap-3">
+                                        <a
+                                            href="https://www.linkedin.com/in/shakira-casusi-31612631a/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-gray-200 transition-colors hover:border-orange-400/50 hover:text-orange-200"
+                                        >
+                                            <FaLinkedin size={18} aria-hidden="true" />
+                                            LinkedIn
+                                        </a>
+                                        <a
+                                            href="https://github.com/ShakiraCasusi"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-gray-200 transition-colors hover:border-orange-400/50 hover:text-orange-200"
+                                        >
+                                            <FaGithub size={18} aria-hidden="true" />
+                                            GitHub
+                                        </a>
                                     </div>
-                                </a>
+                                </div>
                             </div>
 
-                            {/* Establishing Uplink */}
-                            <div className="flex items-center gap-2 text-xs pt-4">
-                                <svg className="w-4 h-4 text-gray-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z" />
-                                </svg>
-                                <svg className="w-4 h-4 text-gray-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-                                </svg>
-                                <span className="text-gray-500">{contactStrings.uplink}</span>
+                            <div className="flex items-center gap-2 border-t border-white/10 pt-5 text-xs font-medium tracking-wide text-gray-400">
+                                <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.7)]" />
+                                <span>OPEN FOR PROJECTS &amp; COLLABORATIONS</span>
                             </div>
                         </div>
 
-                        {/* Right Column - Contact Form */}
-                        <div className="contact-right bg-gray-900/40 p-8 lg:p-12 flex flex-col justify-center">
-                            {/* Form Header */}
-                            <div className="flex items-center gap-2 mb-6">
-                                <svg className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.9429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99621575 L3.03521743,10.4371088 C3.03521743,10.5942061 3.19218622,10.7513035 3.50612381,10.7513035 L16.6915026,11.5367905 C16.6915026,11.5367905 17.1624089,11.5367905 17.1624089,12.0080827 C17.1624089,12.4793748 16.6915026,12.4744748 16.6915026,12.4744748 Z" />
-                                </svg>
-                                <h3 className="text-white font-bold uppercase tracking-wider text-sm">
-                                    {contactStrings.formTitle}
+                        <div className="contact-right bg-gray-900/40 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+                            <div className="mb-6 flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-400/15 text-orange-400">
+                                    <Mail size={19} aria-hidden="true" />
+                                </div>
+                                <h3 className="text-xl font-semibold text-white">
+                                    Send a Message
                                 </h3>
                             </div>
 
-                            {/* Feedback Message */}
                             {feedback && (
-                                <div className={`mb-4 p-3 rounded-lg text-sm ${feedback.type === 'success'
-                                    ? 'bg-green-500/20 border border-green-500/50 text-green-400'
-                                    : 'bg-red-500/20 border border-red-500/50 text-red-400'
-                                    }`}>
+                                <div
+                                    className={`mb-5 rounded-lg border p-3 text-sm ${feedback.type === 'success'
+                                        ? 'border-green-500/50 bg-green-500/20 text-green-300'
+                                        : 'border-red-500/50 bg-red-500/20 text-red-300'
+                                        }`}
+                                    role={feedback.type === 'success' ? 'status' : 'alert'}
+                                >
                                     {feedback.message}
                                 </div>
                             )}
 
-                            {/* Form */}
-                            <form onSubmit={handleSubmit} className="space-y-4">
-                                {/* Name Input */}
-                                <div>
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="space-y-2">
+                                    <label htmlFor="sender_name" className="block text-sm font-medium text-gray-200">
+                                        Your Name
+                                    </label>
                                     <input
+                                        id="sender_name"
                                         type="text"
-                                        name="name"
-                                        value={formData.name}
+                                        name="sender_name"
+                                        value={formData.sender_name}
                                         onChange={handleChange}
-                                        placeholder={contactStrings.senderID}
-                                        className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
+                                        placeholder="Your Name"
+                                        autoComplete="name"
+                                        className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white transition-colors placeholder:text-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400/20"
                                         required
                                     />
                                 </div>
 
-                                {/* Email Input */}
-                                <div>
+                                <div className="space-y-2">
+                                    <label htmlFor="sender_email" className="block text-sm font-medium text-gray-200">
+                                        Your Email Address
+                                    </label>
                                     <input
+                                        id="sender_email"
                                         type="email"
-                                        name="email"
-                                        value={formData.email}
+                                        name="sender_email"
+                                        value={formData.sender_email}
                                         onChange={handleChange}
-                                        placeholder={contactStrings.emailPlaceholder}
-                                        className="w-full bg-transparent border-b border-white/20 text-white px-0 py-2 focus:outline-none focus:border-orange-400 placeholder-gray-500 transition-colors text-sm"
+                                        placeholder="Your Email Address"
+                                        autoComplete="email"
+                                        className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white transition-colors placeholder:text-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400/20"
                                         required
                                     />
                                 </div>
 
-                                {/* Message Textarea */}
-                                <div>
+                                <div className="space-y-2">
+                                    <label htmlFor="message" className="block text-sm font-medium text-gray-200">
+                                        Message
+                                    </label>
                                     <textarea
+                                        id="message"
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        placeholder={contactStrings.messagePlaceholder}
-                                        className="w-full h-24 bg-white/5 border border-white/10 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-orange-400/50 placeholder-gray-500 transition-colors resize-none text-sm"
+                                        placeholder="Enter your message..."
+                                        rows={5}
+                                        className="w-full resize-y rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white transition-colors placeholder:text-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400/20"
                                         required
-                                    ></textarea>
+                                    />
                                 </div>
 
-                                {/* Submit Button */}
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg transition-all duration-300 uppercase tracking-wider flex items-center justify-center gap-2 disabled:opacity-50 text-sm"
+                                    className="contact-submit-button inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400 px-5 py-3 font-bold text-slate-950 shadow-lg shadow-orange-950/30 transition-all duration-300 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300 disabled:cursor-not-allowed disabled:opacity-60"
                                 >
-                                    {loading ? contactStrings.sending : contactStrings.submit}
-                                    <span>→</span>
+                                    <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                                    {!loading && <Send size={17} aria-hidden="true" />}
                                 </button>
                             </form>
                         </div>

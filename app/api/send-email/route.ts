@@ -1,36 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+function escapeHtml(value: string) {
+    return value.replace(/[&<>"']/g, (character) => {
+        const entities: Record<string, string> = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+        };
+        return entities[character];
+    });
+}
+
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { name, email, message } = body;
+        const name = typeof body?.sender_name === 'string'
+            ? body.sender_name.trim().replace(/[\r\n]+/g, ' ')
+            : '';
+        const email = typeof body?.sender_email === 'string'
+            ? body.sender_email.trim()
+            : '';
+        const message = typeof body?.message === 'string'
+            ? body.message.trim()
+            : '';
 
-        // Validate required fields (email is optional)
-        if (!name || !message) {
+        if (!name || !email || !message) {
             return NextResponse.json(
-                { error: 'Please provide your name and message' },
+                { error: 'Please provide your name, email address, and message.' },
                 { status: 400 }
             );
         }
 
-        // Validate email format only if provided
-        if (email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                return NextResponse.json(
-                    { error: 'Invalid email address' },
-                    { status: 400 }
-                );
-            }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return NextResponse.json(
+                { error: 'Please provide a valid email address.' },
+                { status: 400 }
+            );
         }
 
-        // Get environment variables
         const resendApiKey = process.env.RESEND_API_KEY;
         const contactToEmail = process.env.CONTACT_TO_EMAIL;
         const contactFromEmail = process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev';
-
-        // Log the message for debugging
-        console.log('Contact form submission:', { name, email: email || 'Not provided', message });
 
         if (!resendApiKey || !contactToEmail) {
             return NextResponse.json(
@@ -39,7 +52,10 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Send email using Resend API
+        const safeName = escapeHtml(name);
+        const safeEmail = escapeHtml(email);
+        const safeMessage = escapeHtml(message).replace(/\r?\n/g, '<br>');
+
         const response = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
@@ -49,16 +65,16 @@ export async function POST(request: NextRequest) {
             body: JSON.stringify({
                 from: contactFromEmail,
                 to: contactToEmail,
-                replyTo: email || 'noreply@contact-form.local',
-                subject: `New Contact Form Submission from ${name}`,
+                reply_to: email,
+                subject: `New Portfolio Inquiry from ${name} | Shakira Casusi Portfolio`,
                 html: `
-                    <h2>New Contact Message</h2>
-                    <p><strong>From:</strong> ${name}</p>
-                    ${email ? `<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>` : ''}
-                    <h3>Message:</h3>
-                    <p>${message.replace(/\n/g, '<br>')}</p>
+                    <h2>New Portfolio Inquiry</h2>
+                    <p><strong>Name:</strong> ${safeName}</p>
+                    <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+                    <p><strong>Message:</strong></p>
+                    <p>${safeMessage}</p>
                 `,
-                text: `New Contact Message\n\nFrom: ${name}${email ? '\nEmail: ' + email : ''}\n\nMessage:\n${message}`,
+                text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
             }),
         });
 

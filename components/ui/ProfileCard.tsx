@@ -273,8 +273,10 @@ const ProfileCardComponent = ({
                     <Image
                         className="card-image"
                         src={avatarUrl}
-                        alt="Profile"
+                        alt="Portrait of Shakira Angela Agudo Casusi"
                         fill
+                        priority
+                        unoptimized
                     />
                 </div>
             </div>
