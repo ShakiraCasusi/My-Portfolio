@@ -78,14 +78,17 @@
     line-height: 1;
 }
 
-.simpleIcon,
+.imageIcon,
 .customIcon {
     width: 1.75rem;
     height: 1.75rem;
 }
 
-.simpleIcon {
+.imageIcon {
     object-fit: contain;
+}
+
+.whiteIcon {
     filter: brightness(0) invert(1);
 }
 

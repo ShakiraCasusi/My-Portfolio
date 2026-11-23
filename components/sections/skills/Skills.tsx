@@ -1,11 +1,12 @@
-import { BrainCircuit, Clapperboard, MessageSquareText, ShieldCheck } from "lucide-react"
+import { BrainCircuit, MessageSquareText, ShieldCheck } from "lucide-react"
 import styles from "./Skills.module.css"
 
 type Skill = {
     name: string
     devicon?: string
-    simpleIcon?: string
-    customIcon?: "security" | "ai" | "prompt" | "video"
+    imageUrl?: string
+    whiteIcon?: boolean
+    customIcon?: "security" | "ai" | "prompt"
 }
 
 type SkillGroup = {
@@ -21,7 +22,10 @@ const skillGroups: SkillGroup[] = [
         skills: [
             { name: "Figma", devicon: "devicon-figma-plain" },
             { name: "Canva", devicon: "devicon-canva-plain" },
-            { name: "CapCut", customIcon: "video" },
+            {
+                name: "CapCut",
+                imageUrl: "https://sf16-web-tos-buz.capcutstatic.com/obj/capcut-web-buz-sg/common/images/lv_web-2.ico",
+            },
             { name: "Adobe Photoshop", devicon: "devicon-photoshop-plain" },
         ],
     },
@@ -30,9 +34,10 @@ const skillGroups: SkillGroup[] = [
         skills: [
             {
                 name: "Tableau",
-                simpleIcon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tableau.svg",
+                imageUrl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tableau.svg",
+                whiteIcon: true,
             },
-            { name: "Notion", simpleIcon: "https://cdn.simpleicons.org/notion/ffffff" },
+            { name: "Notion", imageUrl: "https://cdn.simpleicons.org/notion/ffffff" },
         ],
     },
     {
@@ -78,11 +83,11 @@ function SkillIcon({ skill }: { skill: Skill }) {
         return <i className={`${skill.devicon} ${styles.devicon}`} aria-hidden="true" />
     }
 
-    if (skill.simpleIcon) {
+    if (skill.imageUrl) {
         return (
             <img
-                className={styles.simpleIcon}
-                src={skill.simpleIcon}
+                className={`${styles.imageIcon} ${skill.whiteIcon ? styles.whiteIcon : ""}`}
+                src={skill.imageUrl}
                 alt=""
                 width="28"
                 height="28"
@@ -98,10 +103,6 @@ function SkillIcon({ skill }: { skill: Skill }) {
 
     if (skill.customIcon === "ai") {
         return <BrainCircuit className={styles.customIcon} aria-hidden="true" />
-    }
-
-    if (skill.customIcon === "video") {
-        return <Clapperboard className={styles.customIcon} aria-hidden="true" />
     }
 
     return <MessageSquareText className={styles.customIcon} aria-hidden="true" />
