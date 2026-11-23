@@ -95,7 +95,7 @@ export function SocialIcons() {
         {
             name: 'Instagram',
             Icon: FaInstagram,
-            url: 'https://www.instagram.com/k.rscu/',
+            url: 'https://www.instagram.com/meoszna/',
             label: 'Instagram Profile'
         },
         {

@@ -1,18 +1,38 @@
-/* Project Card */
-.project-card {
-    transition: all 0.3s ease;
+.projects-extra {
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        grid-template-rows 450ms ease,
+        margin-top 450ms ease,
+        opacity 250ms ease,
+        visibility 0s linear 450ms;
+    visibility: hidden;
 }
 
-/* Stack tags styling */
-.project-card span {
-    transition: all 0.3s ease;
+.projects-extra.is-expanded {
+    grid-template-rows: 1fr;
+    margin-top: 1.5rem;
+    opacity: 1;
+    pointer-events: auto;
+    transition:
+        grid-template-rows 450ms ease,
+        margin-top 450ms ease,
+        opacity 250ms ease,
+        visibility 0s;
+    visibility: visible;
 }
 
-/* View Project link effect */
-.project-card a {
-    transition: all 0.3s ease;
+.projects-extra-inner {
+    min-height: 0;
+    overflow: hidden;
 }
 
-.project-card a:hover {
-    transform: translateX(4px);
+@media (prefers-reduced-motion: reduce) {
+    .projects-extra,
+    .projects-extra.is-expanded {
+        transition: none;
+    }
 }
