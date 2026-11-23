@@ -1,105 +1,128 @@
-'use client';
-
-import Image from 'next/image';
-import './Certifications.css';
+import Image from "next/image"
+import { Award } from "lucide-react"
 
 interface Certification {
-    id: string;
-    title: string;
-    description: string;
-    issuer?: string;
-    date?: string;
-    image?: string;
+    id: string
+    title: string
+    description: string
+    issuer: string
+    date: string
+    image: string
 }
 
 const certifications: Certification[] = [
     {
-        id: '1',
-        title: 'How to design Facebook and IG stories using Canva',
-        issuer: 'Coursera',
-        date: '2024',
-        image: '/pictures/How to Design FB and IG.jpeg',
-        description: 'Learned how to use Canva to design Facebook and Instagram stories.',
+        id: "canva-social-design",
+        title: "How to Design Facebook and IG Stories Using Canva",
+        issuer: "Coursera",
+        date: "2024",
+        image: "/pictures/How to Design FB and IG.jpeg",
+        description:
+            "Practiced creating polished social media stories with Canva layouts, visual hierarchy, and platform-ready design.",
     },
     {
-        id: '2',
-        title: 'Foundations of User Experience (UX) Design',
-        issuer: 'Google via Coursera',
-        date: '2024',
-        image: '/pictures/Foundations of UX.jpg',
-        description: 'Understand foundational concepts in UX design, such as user-centered design, the design process, accessibility, and equity-focused design. ',
+        id: "ux-foundations",
+        title: "Foundations of User Experience (UX) Design",
+        issuer: "Google via Coursera",
+        date: "2024",
+        image: "/pictures/Foundations of UX.jpg",
+        description:
+            "Studied user-centered design, accessibility, equity-focused design, and the end-to-end UX process.",
     },
     {
-        id: '3',
-        title: 'Start the UX Design Process',
-        issuer: 'Google via Coursera',
-        date: '2024',
-        image: '/pictures/UX Design Process.jpg',
-        description: 'Empathize with users to understand their needs and pain points.',
+        id: "ux-process",
+        title: "Start the UX Design Process",
+        issuer: "Google via Coursera",
+        date: "2024",
+        image: "/pictures/UX Design Process.jpg",
+        description:
+            "Learned to research user needs and pain points, then translate findings into clear design opportunities.",
     },
     {
-        id: '4',
-        title: 'Build Wireframes and Low-Fidelity Prototypes',
-        issuer: 'Google via Coursera',
-        date: '2024',
-        image: '/pictures/Build Wireframes.jpg',
-        description: 'Create storyboards to come up with ideas about solutions to user needs.',
+        id: "wireframes-prototypes",
+        title: "Build Wireframes and Low-Fidelity Prototypes",
+        issuer: "Google via Coursera",
+        date: "2024",
+        image: "/pictures/Build Wireframes.jpg",
+        description:
+            "Practiced turning user needs into storyboards, wireframes, and low-fidelity prototype concepts.",
     },
     {
-        id: '5',
-        title: 'Introduction to Cybersecurity',
-        issuer: 'Cisco Networking Academy',
-        date: '2025',
-        image: '/pictures/Cybersec Fundamentals.jpg',
-        description: 'Learn the fundamentals of cybersecurity and understand the importance of protecting digital assets.',
+        id: "cybersecurity",
+        title: "Introduction to Cybersecurity",
+        issuer: "Cisco Networking Academy",
+        date: "2025",
+        image: "/pictures/Cybersec Fundamentals.jpg",
+        description:
+            "Covered cybersecurity fundamentals, common digital threats, and practices for protecting information.",
     },
     {
-        id: '6',
-        title: 'AWS Cloud Foundations',
-        issuer: 'AWS Academy',
-        date: '2026',
-        image: '/pictures/Cloud Foundations.jpg',
-        description: 'Learn the fundamentals of AWS cloud services and understand the importance of protecting digital assets.',
+        id: "aws-cloud-foundations",
+        title: "AWS Cloud Foundations",
+        issuer: "AWS Academy",
+        date: "2026",
+        image: "/pictures/Cloud Foundations.jpg",
+        description:
+            "Studied core cloud concepts, foundational AWS services, cloud architecture, and security considerations.",
     },
-];
+]
 
 export default function Certifications() {
     return (
-        <section className="certifications-section">
-            <div className="certifications-container">
-                <div className="certifications-header">
-                    <h2 className="certifications-title">Certifications</h2>
-                    <div className="header-underline" />
-                </div>
+        <section className="relative px-4 py-20 sm:px-6 lg:px-8">
+            <div className="mx-auto w-full max-w-6xl">
+                <header className="mb-12 text-center">
+                    <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-orange-400">
+                        Learning &amp; growth
+                    </p>
+                    <h2 className="text-4xl font-bold text-white sm:text-5xl">
+                        Certifications
+                    </h2>
+                    <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
+                        Courses and credentials that continue to shape my design and technology practice.
+                    </p>
+                </header>
 
-                <div className="certifications-grid">
-                    {[...certifications].reverse().map((cert) => (
-                        <div key={cert.id} className="certification-card group relative h-64 cursor-pointer rounded-lg overflow-hidden">
-                            {cert.image ? (
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {[...certifications].reverse().map((certification) => (
+                        <article
+                            key={certification.id}
+                            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950/75 shadow-lg shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-orange-400/30 hover:shadow-orange-950/20"
+                        >
+                            <div className="relative aspect-video overflow-hidden bg-[#080611]">
                                 <Image
-                                    src={cert.image}
-                                    alt={cert.title}
+                                    src={certification.image}
+                                    alt={`${certification.title} certificate`}
                                     fill
-                                    className="cert-image"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 />
-                            ) : (
-                                <svg className="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z" />
-                                </svg>
-                            )}
-
-                            {/* Hover Overlay */}
-                            <div className="absolute inset-0 rounded-lg bg-black/90 flex flex-col items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <p className="cert-title">{cert.title}</p>
-                                {cert.issuer && <p className="cert-issuer">{cert.issuer}</p>}
-                                {cert.date && <p className="cert-date">{cert.date}</p>}
-                                <p className="cert-description">{cert.description}</p>
+                                <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-3 py-1 text-xs font-medium text-orange-200 backdrop-blur-md">
+                                    <Award size={14} aria-hidden="true" />
+                                    Certificate
+                                </span>
                             </div>
-                        </div>
+
+                            <div className="flex flex-1 flex-col p-5 sm:p-6">
+                                <div className="flex items-start justify-between gap-3">
+                                    <h3 className="text-lg font-semibold leading-snug text-white">
+                                        {certification.title}
+                                    </h3>
+                                    <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-gray-400">
+                                        {certification.date}
+                                    </span>
+                                </div>
+                                <p className="mt-2 text-sm font-medium text-orange-200">
+                                    {certification.issuer}
+                                </p>
+                                <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-400">
+                                    {certification.description}
+                                </p>
+                            </div>
+                        </article>
                     ))}
                 </div>
             </div>
         </section>
-    );
+    )
 }

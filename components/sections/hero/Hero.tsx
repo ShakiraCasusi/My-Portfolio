@@ -9,10 +9,6 @@ export function Hero() {
     const description = 'Transforming ideas into high-impact digital experiences. Specialist in UI/UX, Web Dev, and Content Strategy. I create functional art for the modern web—from the first pixel to the final edit.'
     const viewProjects = 'View Projects'
     const contactMe = 'Contact Me'
-    const profileName = 'Shakira Angela Agudo Casusi'
-    const profileTitle = 'Developer & Designer'
-    const profileStatus = 'Available'
-
     return (
         <section
             id="hero"
@@ -70,20 +66,9 @@ export function Hero() {
                     {/* Right Column - Profile Card */}
                     <div className="flex items-center justify-center mt-8 lg:mt-0">
                         <ProfileCard
-                            name={profileName}
-                            title={profileTitle}
-                            handle="shakira"
-                            status={profileStatus}
-                            contactText={contactMe}
-                            avatarUrl="/pictures/464751278_567183799036449_3163974364779314123_n.jpg"
-                            showUserInfo={true}
+                            avatarUrl="/pictures/[HERO] Picture 1.jpg"
                             enableTilt={true}
                             enableMobileTilt={false}
-                            onContactClick={() => console.log('Contact clicked')}
-                            behindGlowColor="rgba(255, 140, 0, 0.5)"
-                            iconUrl="/assets/demo/iconpattern.png"
-                            behindGlowEnabled
-                            innerGradient="linear-gradient(145deg,#ff8c00 0%,#ff6b35 100%)"
                         />
                     </div>
                 </div>

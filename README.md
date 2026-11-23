@@ -33,22 +33,20 @@ A modern personal portfolio built with **Next.js 14** (App Router), **Tailwind C
 │   │   │   └── HeroHelpers.tsx       # Typing effect, scrolling text
 │   │   ├── about/
 │   │   │   ├── About.tsx             # About section with 3D Lanyard
-│   │   │   ├── TechStack.tsx         # Technology stack
 │   │   │   ├── Certifications.tsx    # Certifications display
 │   │   │   └── Lanyard.tsx           # 3D Lanyard model
+│   │   ├── skills/
+│   │   │   ├── Skills.tsx            # Creative and technology skills
+│   │   │   └── Skills.module.css     # Skill icon tooltips and layout
 │   │   ├── projects/
 │   │   │   ├── Projects.tsx          # Projects gallery
 │   │   │   └── Projects.css          # Project styles
 │   │   ├── contact/
 │   │   │   ├── Contact.tsx           # Contact form section
 │   │   │   └── Contact.css           # Contact styles
-│   │   └── skills/
-│   │       └── Skills.tsx            # Skills section
 │   ├── ui/
 │   │   ├── Aurora.tsx                # Animated gradient background
-│   │   ├── ProfileCard.tsx           # Profile card component
-│   │   └── BorderGlow.tsx            # Border glow effect
-│   └── BorderGlow.css
+│   │   └── ProfileCard.tsx           # Profile card component
 ├── lib/
 │   └── utils.ts                      # Utility functions (cn)
 ├── styles/

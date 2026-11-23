@@ -14,6 +14,10 @@
 .card-shell {
     position: relative;
     z-index: 1;
+    border-radius: var(--card-radius);
+    box-shadow:
+        0 24px 80px rgb(0 0 0 / 45%),
+        0 0 45px rgb(255 140 0 / 16%);
 }
 
 .card {
@@ -26,6 +30,7 @@
     transition: transform 1s ease;
     transform: translateZ(0) rotateX(0deg) rotateY(0deg);
     background: #000;
+    border: 1px solid rgb(255 255 255 / 12%);
     backface-visibility: hidden;
     overflow: hidden;
 }

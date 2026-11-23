@@ -3,36 +3,28 @@
 import { useState } from "react"
 import Image from "next/image"
 import {
-    Activity,
     ArrowUpRight,
-    BarChart3,
-    BookOpen,
     CalendarDays,
     ChartNoAxesCombined,
     ChevronDown,
-    Code2,
     FileSpreadsheet,
-    Leaf,
     Target,
     WifiOff,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import "./Projects.css"
 
-type ProjectMark = {
-    label: string
-    devicon?: string
-    icon?: LucideIcon
-}
+type ProjectMark =
+    | { label: string; devicon: string }
+    | { label: string; icon: LucideIcon }
 
 interface Project {
     id: string
     title: string
     category: string
     description: string
-    image?: string
-    imageAlt?: string
-    previewIcon: LucideIcon
+    image: string
+    imageAlt: string
     marks: ProjectMark[]
     viewLink?: string
 }
@@ -44,7 +36,8 @@ const projects: Project[] = [
         category: "Web Development",
         description:
             "An offline-ready study companion for students, combining grade tracking, smart study planning, and focus-building habits.",
-        previewIcon: BookOpen,
+        image: "/pictures/ROKI.png",
+        imageAlt: "Roki student planner and focus dashboard",
         marks: [
             { label: "Offline-ready", icon: WifiOff },
             { label: "Grade tracking", icon: ChartNoAxesCombined },
@@ -59,7 +52,8 @@ const projects: Project[] = [
         category: "Data Analytics",
         description:
             "A Tableau dashboard exploring Metro Manila's 2025 PM2.5 levels, WHO guideline exceedances, spatial distribution, seasonal trends, and zone-level patterns.",
-        previewIcon: ChartNoAxesCombined,
+        image: "/pictures/AIR Quality NCR.png",
+        imageAlt: "Air Quality NCR dashboard showing PM2.5 trends and regional patterns",
         marks: [{ label: "Tableau", icon: ChartNoAxesCombined }],
     },
     {
@@ -68,7 +62,8 @@ const projects: Project[] = [
         category: "Visual Design",
         description:
             "A Canva-built interactive experience raising awareness of climate change impacts in the Philippines and sharing resilience-focused insights and solutions.",
-        previewIcon: Leaf,
+        image: "/pictures/Climate Ready PH.png",
+        imageAlt: "Climate Ready Philippines website homepage",
         marks: [{ label: "Canva", devicon: "devicon-canva-plain" }],
         viewLink: "https://shakiracasusi.my.canva.site/climate-ready-philippines",
     },
@@ -80,7 +75,6 @@ const projects: Project[] = [
             "A second-hand book marketplace that helps students and readers find affordable, quality books.",
         image: "/pictures/ReRead.png",
         imageAlt: "Re;Read online bookstore homepage",
-        previewIcon: Code2,
         marks: [
             { label: "HTML", devicon: "devicon-html5-plain" },
             { label: "CSS", devicon: "devicon-css3-plain" },
@@ -98,7 +92,6 @@ const projects: Project[] = [
             "An academic monitoring prototype that analyzes temperature, humidity, and shock sensor data to track package conditions in transit.",
         image: "/pictures/IoT Logistics Monitoring Dashboard.png",
         imageAlt: "IoT logistics dashboard showing temperature, humidity, and shock readings",
-        previewIcon: Activity,
         marks: [
             { label: "HTML", devicon: "devicon-html5-plain" },
             { label: "Jupyter Notebook", devicon: "devicon-jupyter-plain" },
@@ -113,7 +106,6 @@ const projects: Project[] = [
             "A 2025 business analysis of MotorPH sales and inventory, highlighting the company's readiness to expand into physical stores across the Philippines.",
         image: "/pictures/MotorPH Sales Dashboard.png",
         imageAlt: "MotorPH sales dashboard with key metrics and sales trends",
-        previewIcon: BarChart3,
         marks: [{ label: "Google Sheets", icon: FileSpreadsheet }],
         viewLink:
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vSf9pdXIjBNbttqoG829u0XZzaPNQqXeIEwKgjyYjB6lwPS9koRdJUu9Y49x0GrBO3Pr1BWozHYusx7/pubhtml?gid=33346753&single=true",
@@ -130,29 +122,16 @@ function ProjectCard({
     project: Project
     linkTabIndex?: number
 }) {
-    const PreviewIcon = project.previewIcon
-
     return (
         <article className="project-card group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950/75 shadow-lg shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-orange-400/30 hover:shadow-orange-950/20">
             <div className="relative aspect-video overflow-hidden bg-[#080611]">
-                {project.image ? (
-                    <Image
-                        src={project.image}
-                        alt={project.imageAlt ?? `${project.title} project screenshot`}
-                        fill
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-400/15 via-[#100b20] to-[#080611] text-orange-200">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-orange-300/20 bg-white/[0.04] shadow-lg shadow-orange-950/20">
-                            <PreviewIcon size={30} strokeWidth={1.4} aria-hidden="true" />
-                        </div>
-                        <span className="text-xs font-medium tracking-wide text-gray-400">
-                            Screenshot to be added
-                        </span>
-                    </div>
-                )}
+                <Image
+                    src={project.image}
+                    alt={project.imageAlt}
+                    fill
+                    className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
                 <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/60 px-3 py-1 text-xs font-medium text-orange-200 backdrop-blur-md">
                     {project.category}
                 </span>
@@ -172,7 +151,6 @@ function ProjectCard({
                         aria-label="Project tools and highlights"
                     >
                         {project.marks.map((mark) => {
-                            const Icon = mark.icon
                             return (
                                 <li key={mark.label}>
                                     <span
@@ -181,14 +159,14 @@ function ProjectCard({
                                         aria-label={mark.label}
                                         role="img"
                                     >
-                                        {mark.devicon ? (
+                                        {"devicon" in mark ? (
                                             <i
                                                 className={`${mark.devicon} text-base`}
                                                 aria-hidden="true"
                                             />
-                                        ) : Icon ? (
-                                            <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
-                                        ) : null}
+                                        ) : (
+                                            <mark.icon size={17} strokeWidth={1.8} aria-hidden="true" />
+                                        )}
                                     </span>
                                 </li>
                             )

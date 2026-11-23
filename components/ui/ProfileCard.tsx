@@ -15,13 +15,21 @@ const ANIMATION_CONFIG = {
 const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
 const round = (v: number, precision = 3) => parseFloat(v.toFixed(precision));
 
+interface ProfileCardProps {
+    avatarUrl: string;
+    className?: string;
+    enableTilt?: boolean;
+    enableMobileTilt?: boolean;
+    mobileTiltSensitivity?: number;
+}
+
 const ProfileCardComponent = ({
-    avatarUrl = '/pictures/default.jpg',
+    avatarUrl,
     className = '',
     enableTilt = true,
     enableMobileTilt = false,
     mobileTiltSensitivity = 5,
-}: any) => {
+}: ProfileCardProps) => {
     const wrapRef = useRef<HTMLDivElement>(null);
     const shellRef = useRef<HTMLDivElement>(null);
     const leaveRafRef = useRef<number | null>(null);
